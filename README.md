@@ -47,4 +47,7 @@ public void Should_handle_simple_object()
 ```
 
 ## Benchmarks
-[Report](src/SimpleObjectComparerDotNet.Benchmarks/BenchmarkDotNet.Artifacts/results/SimpleObjectComparerDotNet.Benchmarks.Benchmarks-report-github.md)
+[ObjectComparer](src/SimpleObjectComparerDotNet.Benchmarks/BenchmarkDotNet.Artifacts/results/SimpleObjectComparerDotNet.Benchmarks.ObjectComparerBenchmarks-report-github.md)
+
+[ObjectMembersCollector](src/SimpleObjectComparerDotNet.Benchmarks/BenchmarkDotNet.Artifacts/results/SimpleObjectComparerDotNet.Benchmarks.ObjectMembersBenchmarks-report-github.md)
+
