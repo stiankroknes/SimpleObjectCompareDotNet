@@ -1,9 +1,8 @@
 <Project>
   <PropertyGroup>
     <Product>SimpleObjectComparerDotNet</Product>
-    <VersionPrefix>0.0.1</VersionPrefix>
     <!-- <NuspecBasePath>$(MSBuildProjectDirectory)</NuspecBasePath> -->
-    <Copyright>Copyright Stian Kroknes (c) 2020</Copyright>
+    <Copyright>Copyright Stian Kroknes (c) 2022</Copyright>
     <LangVersion>preview</LangVersion>
     <Features>strict</Features>
   </PropertyGroup>
