@@ -1,0 +1,82 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.32912.340
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleObjectComparerDotNet", "src\SimpleObjectComparerDotNet\SimpleObjectComparerDotNet.csproj", "{86B4EC5B-C49F-457B-A4CD-E84FDE4CB99D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleObjectComparerDotNet.Tests", "src\SimpleObjectComparerDotNet.Tests\SimpleObjectComparerDotNet.Tests.csproj", "{437F60DF-0AF8-4219-8739-EA50B001CA79}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleObjectComparerDotNet.Benchmarks", "src\SimpleObjectComparerDotNet.Benchmarks\SimpleObjectComparerDotNet.Benchmarks.csproj", "{20FBAADA-BFD0-43F0-9E6F-A4A65D6C6770}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01_SolutionItems", "01_SolutionItems", "{EC6CECED-D00B-4C2B-A574-3E65E564D2E0}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		Build.ps1 = Build.ps1
+		Push.ps1 = Push.ps1
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{CF510B16-1F7E-46E0-83C4-AE57C15B0322}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\ci.yml = .github\workflows\ci.yml
+		.github\workflows\release.yml = .github\workflows\release.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{86B4EC5B-C49F-457B-A4CD-E84FDE4CB99D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86B4EC5B-C49F-457B-A4CD-E84FDE4CB99D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86B4EC5B-C49F-457B-A4CD-E84FDE4CB99D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{86B4EC5B-C49F-457B-A4CD-E84FDE4CB99D}.Debug|x64.Build.0 = Debug|Any CPU
+		{86B4EC5B-C49F-457B-A4CD-E84FDE4CB99D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{86B4EC5B-C49F-457B-A4CD-E84FDE4CB99D}.Debug|x86.Build.0 = Debug|Any CPU
+		{86B4EC5B-C49F-457B-A4CD-E84FDE4CB99D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86B4EC5B-C49F-457B-A4CD-E84FDE4CB99D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86B4EC5B-C49F-457B-A4CD-E84FDE4CB99D}.Release|x64.ActiveCfg = Release|Any CPU
+		{86B4EC5B-C49F-457B-A4CD-E84FDE4CB99D}.Release|x64.Build.0 = Release|Any CPU
+		{86B4EC5B-C49F-457B-A4CD-E84FDE4CB99D}.Release|x86.ActiveCfg = Release|Any CPU
+		{86B4EC5B-C49F-457B-A4CD-E84FDE4CB99D}.Release|x86.Build.0 = Release|Any CPU
+		{437F60DF-0AF8-4219-8739-EA50B001CA79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{437F60DF-0AF8-4219-8739-EA50B001CA79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{437F60DF-0AF8-4219-8739-EA50B001CA79}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{437F60DF-0AF8-4219-8739-EA50B001CA79}.Debug|x64.Build.0 = Debug|Any CPU
+		{437F60DF-0AF8-4219-8739-EA50B001CA79}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{437F60DF-0AF8-4219-8739-EA50B001CA79}.Debug|x86.Build.0 = Debug|Any CPU
+		{437F60DF-0AF8-4219-8739-EA50B001CA79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{437F60DF-0AF8-4219-8739-EA50B001CA79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{437F60DF-0AF8-4219-8739-EA50B001CA79}.Release|x64.ActiveCfg = Release|Any CPU
+		{437F60DF-0AF8-4219-8739-EA50B001CA79}.Release|x64.Build.0 = Release|Any CPU
+		{437F60DF-0AF8-4219-8739-EA50B001CA79}.Release|x86.ActiveCfg = Release|Any CPU
+		{437F60DF-0AF8-4219-8739-EA50B001CA79}.Release|x86.Build.0 = Release|Any CPU
+		{20FBAADA-BFD0-43F0-9E6F-A4A65D6C6770}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20FBAADA-BFD0-43F0-9E6F-A4A65D6C6770}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20FBAADA-BFD0-43F0-9E6F-A4A65D6C6770}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{20FBAADA-BFD0-43F0-9E6F-A4A65D6C6770}.Debug|x64.Build.0 = Debug|Any CPU
+		{20FBAADA-BFD0-43F0-9E6F-A4A65D6C6770}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{20FBAADA-BFD0-43F0-9E6F-A4A65D6C6770}.Debug|x86.Build.0 = Debug|Any CPU
+		{20FBAADA-BFD0-43F0-9E6F-A4A65D6C6770}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20FBAADA-BFD0-43F0-9E6F-A4A65D6C6770}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20FBAADA-BFD0-43F0-9E6F-A4A65D6C6770}.Release|x64.ActiveCfg = Release|Any CPU
+		{20FBAADA-BFD0-43F0-9E6F-A4A65D6C6770}.Release|x64.Build.0 = Release|Any CPU
+		{20FBAADA-BFD0-43F0-9E6F-A4A65D6C6770}.Release|x86.ActiveCfg = Release|Any CPU
+		{20FBAADA-BFD0-43F0-9E6F-A4A65D6C6770}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CF510B16-1F7E-46E0-83C4-AE57C15B0322} = {EC6CECED-D00B-4C2B-A574-3E65E564D2E0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {75943B95-8661-4D24-834C-61AEC9C1689A}
+	EndGlobalSection
+EndGlobal

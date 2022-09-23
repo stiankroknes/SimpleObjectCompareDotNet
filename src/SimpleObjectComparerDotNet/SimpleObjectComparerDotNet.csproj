@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<Authors>Stian Kroknes</Authors>
+		<Description>Simple object comparer and object member collector.</Description>
+		<Copyright>Copyright Stian Kroknes</Copyright>
+		<LangVersion>latest</LangVersion>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageTags>comparer;object;collector</PackageTags>
+		<PackageProjectUrl>https://github.com/stiankroknes/SimpleObjectCompareDotNet</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/stiankroknes/SimpleObjectCompareDotNet</RepositoryUrl>
+		<PackageId>SimpleObjectCompareDotNet</PackageId>
+		<Nullable>enable</Nullable>
+		<MinVerTagPrefix>v</MinVerTagPrefix>
+		<!-- Optional: Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element) -->
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<!-- Optional: Embed source files that are not tracked by the source control manager in the PDB -->
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<!-- Optional: Build symbol package (.snupkg) to distribute the PDB containing Source Link -->
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+		<PackageReference Include="MinVer" Version="4.2.0" PrivateAssets="All" />
+	</ItemGroup>
+
+</Project>
