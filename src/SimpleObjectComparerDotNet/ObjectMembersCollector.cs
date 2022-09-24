@@ -10,40 +10,36 @@ namespace SimpleObjectComparerDotNet;
 public static class ObjectMembersCollector
 {
     public static IReadOnlyList<CollectedPropertyValue> Collect<TType>(TType instance, Action<ObjectMembersCollectorOptions>? configure = null)
-        where TType : class => Collect(instance, string.Empty, configure);
-
-    public static IReadOnlyList<CollectedPropertyValue> Collect<TType>(TType instance, string currentPath, Action<ObjectMembersCollectorOptions>? configure = null)
         where TType : class
     {
-        var collected = new List<CollectedPropertyValue>();
-
         var options = new ObjectMembersCollectorOptions();
 
         configure?.Invoke(options);
 
-        Collect(instance.GetType(), instance, currentPath, collected, options);
+        var context = new CollectorContext(options);
 
-        return collected;
+        Collect(context, instance.GetType(), instance);
+
+        return context.Results;
     }
 
-    private static void Collect<TType>(Type instanceType, TType instance, string currentPath, List<CollectedPropertyValue> results, ObjectMembersCollectorOptions options)
+    private static void Collect<TType>(CollectorContext context, Type instanceType, TType instance)
         where TType : class
     {
         if (instance is not string &&
             instance is IEnumerable enumerable)
         {
-            ProcessCollection(instanceType, currentPath, results, enumerable, options);
+            ProcessCollection(context, instanceType, enumerable);
         }
         else
         {
-            ProcessProperty(instanceType, instance, currentPath, results, options);
+            ProcessProperty(context, instanceType, instance);
         }
     }
 
-    private static void ProcessCollection(Type instanceType, string path, List<CollectedPropertyValue> results, IEnumerable enumerable, ObjectMembersCollectorOptions options)
+    private static void ProcessCollection(CollectorContext context, Type instanceType, IEnumerable enumerable)
     {
         string? scopeName = null;
-        var currentPath = path;
         int idx = 0;
 
         foreach (var value in enumerable)
@@ -53,22 +49,23 @@ public static class ObjectMembersCollector
 
             if (!ClrScope.Contains(scopeName))
             {
-                Collect(type, value, GetIndexedPath(currentPath, idx), results, options);
+                context.SetIndexedPath(idx);
+                ProcessProperty(context, type, value);
             }
             else
             {
-                results.Add(new CollectedPropertyValue(instanceType, type, GetIndexedPath(currentPath, idx), GetStringValue(value, options)));
+                context.AddIndexed(instanceType, type, idx, value);
             }
 
             idx++;
         }
     }
 
-    private static void ProcessProperty<TType>(Type instanceType, TType instance, string currentPath, List<CollectedPropertyValue> results, ObjectMembersCollectorOptions options)
+    private static void ProcessProperty<TType>(CollectorContext context, Type instanceType, TType instance)
          where TType : class
     {
-        var fields = GetFields(instance, instanceType, options);
-        var properties = GetProperties(instance, instanceType, options);
+        var fields = GetFields(instance, instanceType, context.Options);
+        var properties = GetProperties(instance, instanceType, context.Options);
 
         var possiblePropertiesWithBackingField = properties.Where(p => fields.Any(f => f.Name.EndsWith(p.Name, StringComparison.Ordinal)));
 
@@ -80,29 +77,31 @@ public static class ObjectMembersCollector
             {
                 if (value != null)
                 {
-                    Collect(pi.Type, value, CreatePath(currentPath, pi.Name, options), results, options);
+                    context.SetRootPath(pi.Name);
+                    ProcessProperty(context, pi.Type, value);
                 }
-                else if (!options.IgnoreNullValues)
+                else if (!context.Options.IgnoreNullValues)
                 {
-                    results.Add(new CollectedPropertyValue(instanceType, pi.Type, CreatePath(currentPath, pi.Name, options), options.ValueFormats.NullValue));
+                    context.AddNull(instanceType, pi.Type, pi.Name);
                 }
             }
-            else if (value is not string && value is IEnumerable enumerable11)
+            else if (value is not string && value is IEnumerable enumerable)
             {
-                ProcessCollection(instanceType, CreatePath(currentPath, pi.Name, options), results, enumerable11, options);
+                context.SetRootPath(pi.Name);
+                ProcessCollection(context, instanceType, enumerable);
             }
             else
             {
                 if (value == null)
                 {
-                    if (!options.IgnoreNullValues)
+                    if (!context.Options.IgnoreNullValues)
                     {
-                        results.Add(new CollectedPropertyValue(instanceType, pi.Type, CreatePath(currentPath, pi.Name, options), options.ValueFormats.NullValue));
+                        context.AddNull(instanceType, pi.Type, pi.Name);
                     }
                 }
                 else
                 {
-                    results.Add(new CollectedPropertyValue(instanceType, pi.Type, CreatePath(currentPath, pi.Name, options), GetStringValue(value, options)));
+                    context.Add(instanceType, pi.Type, pi.Name, value);
                 }
             }
         }
@@ -142,4 +141,33 @@ public static class ObjectMembersCollector
     }
 
     private record SimpleMemberInfo(string Name, Type Type, object? Value);
+
+    internal class CollectorContext
+    {
+        private readonly List<CollectedPropertyValue> results = new();
+        private string currentPath = string.Empty;
+        private string rootPath = string.Empty;
+
+        internal IReadOnlyList<CollectedPropertyValue> Results => results;
+
+        internal ObjectMembersCollectorOptions Options { get; }
+
+        public CollectorContext(ObjectMembersCollectorOptions options)
+        {
+            Options = options;
+        }
+
+        internal void SetRootPath(string path) => currentPath = rootPath = CreatePath(currentPath, path, Options);
+
+        internal void SetIndexedPath(int index) => currentPath = GetIndexedPath(rootPath, index);
+
+        internal void Add(Type instanceType, Type type, string path, object? value) =>
+            results.Add(new CollectedPropertyValue(instanceType, type, CreatePath(currentPath, path, Options), GetStringValue(value, Options)));
+
+        internal void AddNull(Type instanceType, Type type, string path) =>
+            results.Add(new CollectedPropertyValue(instanceType, type, CreatePath(currentPath, path, Options), Options.ValueFormats.NullValue));
+
+        internal void AddIndexed(Type instanceType, Type type, int index, object? value) =>
+            results.Add(new CollectedPropertyValue(instanceType, type, GetIndexedPath(rootPath, index), GetStringValue(value, Options)));
+    }
 }

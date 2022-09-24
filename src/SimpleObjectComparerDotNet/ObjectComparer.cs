@@ -73,7 +73,7 @@ public static class ObjectComparer
             if (!ClrScope.Contains(scopeName))
             {
                 context.SetIndexedPath(idx);
-                Compare(context, type1, type2, val1, val2);
+                ProcessProperty(context, type1, type2, val1, val2);
             }
             else
             {
@@ -107,7 +107,7 @@ public static class ObjectComparer
                 if (value1 != null && value2 != null)
                 {
                     context.SetRootPath(pi.Name);
-                    Compare(context, type1, type2, value1, value2);
+                    ProcessProperty(context, type1, type2, value1, value2);
                 }
                 else if (!IsEqual(pi.Type1, value1, value2, context.Options))
                 {
@@ -118,7 +118,7 @@ public static class ObjectComparer
                     context.AddNullValueResult(pi.Name);
                 }
             }
-            else if (!IsEqual(pi.Type1, value1, value2, context.Options))
+            else
             {
                 if (value1 is not string &&
                     value1 is IEnumerable enumerable11 && value2 is IEnumerable enumerable22)
@@ -128,12 +128,9 @@ public static class ObjectComparer
                 }
                 else
                 {
-                    context.AddResult(false, pi.Name, value1, value2);
+                    bool equal = IsEqual(pi.Type1, value1, value2, context.Options);
+                    context.AddResult(equal, pi.Name, value1, value2);
                 }
-            }
-            else
-            {
-                context.AddResult(true, pi.Name, value1, value2);
             }
         }
     }

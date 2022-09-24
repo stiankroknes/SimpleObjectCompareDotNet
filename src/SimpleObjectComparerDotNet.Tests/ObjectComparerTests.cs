@@ -105,6 +105,20 @@ public class ObjectComparerTests
     }
 
     [Fact]
+    public void Should_handle_same_collection_reference_equal()
+    {
+        var collection = new[] { new Simple { Test = "11" } }.ToList();
+        var result1 = new SimpleCollection { TestCol = "1", Collection = collection };
+        var result2 = new SimpleCollection { TestCol = "1", Collection = collection };
+
+        var result = ObjectComparer.ComparePublicMembers(result1, result2);
+
+        result.Should().BeEquivalentTo(
+            new CompareResult(true, nameof(SimpleCollection.TestCol), result1.TestCol, result2.TestCol),
+            new CompareResult(true, $"{nameof(SimpleCollection.Collection)}[0].{nameof(Simple.Test)}", result1.Collection[0].Test, result2.Collection[0].Test));
+    }
+
+    [Fact]
     public void Should_handle_collection_not_equal()
     {
         var result1 = new SimpleCollection { TestCol = "1", Collection = new[] { new Simple { Test = "11" } }.ToList() };
