@@ -78,7 +78,7 @@ public static class ObjectMembersCollector
                 if (value != null)
                 {
                     context.SetRootPath(pi.Name);
-                    ProcessProperty(context, pi.Type, value);
+                    Collect(context, pi.Type, value);
                 }
                 else if (!context.Options.IgnoreNullValues)
                 {

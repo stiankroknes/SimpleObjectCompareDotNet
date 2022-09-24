@@ -333,6 +333,30 @@ public class ObjectComparerTests
         result.Should().BeEquivalentTo(new CompareResult(true, $"{nameof(SimpleDouble.Value)}", result1.Value.ToString(), result2.Value.ToString()));
     }
 
+    [Fact]
+    public void Should_handle_property_custom_collections()
+    {
+        var result1 = new TypeWithCustomCollection { TestString = "1", Values = new CustomCollection<string>(new[] { "1" }) };
+        var result2 = new TypeWithCustomCollection { TestString = "1", Values = new CustomCollection<string>(new[] { "1" }) };
+
+        var result = ObjectComparer.ComparePublicMembers(result1, result2);
+
+        result.Should().BeEquivalentTo(
+            new CompareResult(true, nameof(TypeWithCustomCollection.TestString), result1.TestString, result2.TestString),
+            new CompareResult(true, $"{nameof(TypeWithCustomCollection.Values)}[0]", result1.Values[0], result2.Values[0]));
+    }
+
+    [Fact]
+    public void Should_handle_custom_collections()
+    {
+        var result1 = new CustomCollection<string>(new[] { "1" });
+        var result2 = new CustomCollection<string>(new[] { "1" });
+
+        var result = ObjectComparer.ComparePublicMembers(result1, result2);
+
+        result.Should().BeEquivalentTo(new CompareResult(true, $"[0]", result1[0], result2[0]));
+    }
+
     class SimpleDouble
     {
         public double Value { get; set; }
@@ -419,5 +443,17 @@ public class ObjectComparerTests
     {
         public string TestString { get; set; }
         public List<double> Collection { get; set; } = new List<double>();
+    }
+
+    private class TypeWithCustomCollection
+    {
+        public string TestString { get; set; }
+        public CustomCollection<string> Values { get; set; } = new CustomCollection<string>();
+    }
+
+    private class CustomCollection<T> : List<T>
+    {
+        public CustomCollection() { }
+        public CustomCollection(IEnumerable<T> collection) : base(collection) { }
     }
 }

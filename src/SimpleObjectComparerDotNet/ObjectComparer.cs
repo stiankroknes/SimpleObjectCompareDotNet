@@ -107,7 +107,7 @@ public static class ObjectComparer
                 if (value1 != null && value2 != null)
                 {
                     context.SetRootPath(pi.Name);
-                    ProcessProperty(context, type1, type2, value1, value2);
+                    Compare(context, pi.Type1, pi.Type2, value1, value2);
                 }
                 else if (!IsEqual(pi.Type1, value1, value2, context.Options))
                 {
