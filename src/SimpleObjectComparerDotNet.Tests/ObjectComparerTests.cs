@@ -212,6 +212,24 @@ public class ObjectComparerTests
     }
 
     [Fact]
+    public void Should_handle_collection_primitive_double_custom_type_comparer_equal()
+    {
+        var result1 = new SimpleCollectionDouble { TestString = "1", Collection = new[] { 1.02 }.ToList() };
+        var result2 = new SimpleCollectionDouble { TestString = "1", Collection = new[] { 1.03 }.ToList() };
+
+        var result = ObjectComparer.ComparePublicMembers(result1, result2, config =>
+        {
+            config.AddCustomTypeComparer(typeof(double), new DoubleComparer(0.1));
+        });
+
+        result.Should().BeEquivalentTo(new[]
+        {
+            new CompareResult(true, nameof(SimpleCollectionString.TestString), result1.TestString, result2.TestString),
+            new CompareResult(true, $"{nameof(SimpleCollectionString.Collection)}[0]", result1.Collection[0].ToString(), result2.Collection[0].ToString()),
+        });
+    }
+
+    [Fact]
     public void Should_handle_collection_nestedobj_equal()
     {
         var result1 = new CollectionWithNestedObject { TestNestedCol = "1", Collection = new[] { new SimpleNested { TestNested = "11", Simple = new Simple { Test = "111" } } }.ToList() };
@@ -381,5 +399,11 @@ public class ObjectComparerTests
     {
         public string TestString { get; set; }
         public List<string> Collection { get; set; } = new List<string>();
+    }
+
+    private class SimpleCollectionDouble
+    {
+        public string TestString { get; set; }
+        public List<double> Collection { get; set; } = new List<double>();
     }
 }
