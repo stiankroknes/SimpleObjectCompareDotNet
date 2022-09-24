@@ -66,6 +66,38 @@ public class ObjectMembersCollectorTests
         result.Should().BeEquivalentTo(new CollectedPropertyValue(typeof(Simple), typeof(string), "[0].Test", "1"));
     }
 
+    [Fact]
+    public void Should_handle_property_custom_collections()
+    {
+        var instance = new TypeWithCustomCollection { TestString = "1", Values = new CustomCollection<string>(new[] { "1" }) };
+
+        var result = ObjectMembersCollector.Collect(instance);
+
+        result.Should().BeEquivalentTo(
+            new CollectedPropertyValue(typeof(TypeWithCustomCollection), typeof(string), "TestString", "1"),
+            new CollectedPropertyValue(typeof(CustomCollection<string>), typeof(string), "Values[0]", "1"));
+    }
+
+    [Fact]
+    public void Should_handle_custom_generic_collections()
+    {
+        var instance = new CustomCollection<string>(new[] { "1" });
+
+        var result = ObjectMembersCollector.Collect(instance);
+
+        result.Should().BeEquivalentTo(new CollectedPropertyValue(typeof(CustomCollection<string>), typeof(string), "[0]", "1"));
+    }
+
+    [Fact]
+    public void Should_handle_custom_collections()
+    {
+        var instance = new CustomStringCollection(new[] { "1" });
+
+        var result = ObjectMembersCollector.Collect(instance);
+
+        result.Should().BeEquivalentTo(new CollectedPropertyValue(typeof(CustomStringCollection), typeof(string), "[0]", "1"));
+    }
+
     private class Simple
     {
         public string Test { get; set; }
@@ -93,5 +125,22 @@ public class ObjectMembersCollectorTests
     {
         public string TestString { get; set; }
         public List<string> Collection { get; set; } = new List<string>();
+    }
+
+    private class TypeWithCustomCollection
+    {
+        public string TestString { get; set; }
+        public CustomCollection<string> Values { get; set; } = new CustomCollection<string>();
+    }
+
+    private class CustomCollection<T> : List<T>
+    {
+        public CustomCollection() { }
+        public CustomCollection(IEnumerable<T> collection) : base(collection) { }
+    }
+
+    private class CustomStringCollection : List<string>
+    {
+        public CustomStringCollection(IEnumerable<string> collection) : base(collection) { }
     }
 }

@@ -26,32 +26,32 @@ public static class ObjectComparer
 
         configure?.Invoke(options);
 
-        var result = new List<CompareResult>();
+        var context = new CompareContext(options);
 
         var type1 = expected?.GetType() ?? typeof(TValueType);
         var type2 = actual?.GetType() ?? typeof(TValueType);
 
-        Compare(type1, type2, expected, actual, string.Empty, result, options);
+        Compare(context, type1, type2, expected, actual);
 
-        return result;
+        return context.Results;
     }
 
-    private static void Compare(Type? type1, Type? type2, object? instance1, object? instance2, string currentPath, List<CompareResult> results, ObjectCompareOptions options)
+    private static void Compare(CompareContext context, Type? type1, Type? type2, object? instance1, object? instance2)
     {
         if (instance1 is not string &&
             instance1 is IEnumerable enumerable1 && instance2 is IEnumerable enumerable2)
         {
             var actualType1 = type1?.GetActualPropertyType();
             var actualType2 = type2?.GetActualPropertyType();
-            ProcessCollection(currentPath, results, actualType1, actualType2, enumerable1, enumerable2, options);
+            ProcessCollection(context, actualType1, actualType2, enumerable1, enumerable2);
         }
         else
         {
-            ProcessProperty(type1, type2, instance1, instance2, currentPath, results, options);
+            ProcessProperty(context, type1, type2, instance1, instance2);
         }
     }
 
-    private static void ProcessCollection(string path, List<CompareResult> results, Type? type1, Type? type2, IEnumerable enumerable1, IEnumerable enumerable2, ObjectCompareOptions options)
+    private static void ProcessCollection(CompareContext context, Type? type1, Type? type2, IEnumerable enumerable1, IEnumerable enumerable2)
     {
         var list1 = enumerable1.OfType<object>().ToList();
         var list2 = enumerable2.OfType<object>().ToList();
@@ -59,8 +59,6 @@ public static class ObjectComparer
         var max = Math.Max(list1.Count, list2.Count);
 
         string? scopeName = default;
-
-        var currentPath = path;
 
         for (int idx = 0; idx < max; idx++)
         {
@@ -74,28 +72,28 @@ public static class ObjectComparer
 
             if (!ClrScope.Contains(scopeName))
             {
-                Compare(type1, type2, val1, val2, GetIndexedPath(currentPath, idx), results, options);
+                context.SetIndexedPath(idx);
+                ProcessProperty(context, type1, type2, val1, val2);
             }
             else
             {
-                bool equal = Equals(val1, val2);
-                results.Add(new CompareResult(equal, GetIndexedPath(currentPath, idx), GetStringValue(val1, options), GetStringValue(val2, options)));
+                // Collection of primitives.
+                bool equal = IsEqual((type1 ?? type2), val1, val2, context.Options);
+                context.AddIndexedResult(equal, idx, val1, val2);
             }
         }
 
         bool isListCountEqual = list1.Count == list2.Count;
         if (!isListCountEqual)
         {
-            results.Add(new CompareResult(false, CreatePath(path, nameof(IList.Count), options), list1.Count.ToString(), list2.Count.ToString()));
-            results.Add(new CompareResult(false, CreatePath(path, nameof(Array.Length), options), list1.Count.ToString(), list2.Count.ToString()));
-            results.Add(new CompareResult(false, CreatePath(path, nameof(Array.LongLength), options), list1.Count.ToString(), list2.Count.ToString()));
+            context.AddCountResults(list1, list2);
         }
     }
 
-    private static void ProcessProperty(Type? type1, Type? type2, object? instance1, object? instance2, string currentPath, List<CompareResult> results, ObjectCompareOptions options)
+    private static void ProcessProperty(CompareContext context, Type? type1, Type? type2, object? instance1, object? instance2)
     {
-        var fields = GetFields(type1, type2, instance1, instance2, options);
-        var properties = GetProperties(type1, type2, instance1, instance2, options);
+        var fields = GetFields(type1, type2, instance1, instance2, context.Options);
+        var properties = GetProperties(type1, type2, instance1, instance2, context.Options);
 
         var possiblePropertiesWithBackingField = properties.Where(p => fields.Any(field => field.Name.EndsWith(p.Name, StringComparison.Ordinal)));
 
@@ -108,39 +106,38 @@ public static class ObjectComparer
             {
                 if (value1 != null && value2 != null)
                 {
-                    Compare(type1, type2, value1, value2, CreatePath(currentPath, pi.Name, options), results, options);
+                    context.SetRootPath(pi.Name);
+                    Compare(context, pi.Type1, pi.Type2, value1, value2);
                 }
-                else if (!IsEqual(pi.Type1, value1, value2, options))
+                else if (!IsEqual(pi.Type1, value1, value2, context.Options))
                 {
-                    results.Add(new CompareResult(false, CreatePath(currentPath, pi.Name, options), GetStringValue(value1, options), GetStringValue(value2, options)));
+                    context.AddResult(false, pi.Name, value1, value2);
                 }
                 else if (value1 == null && value2 == null)
                 {
-                    results.Add(new CompareResult(true, CreatePath(currentPath, pi.Name, options), options.ValueFormats.NullValue, options.ValueFormats.NullValue));
-                }
-            }
-            else if (!IsEqual(pi.Type1, value1, value2, options))
-            {
-                if (value1 is not string &&
-                    value1 is IEnumerable enumerable11 && value2 is IEnumerable enumerable22)
-                {
-                    ProcessCollection(CreatePath(currentPath, pi.Name, options), results, pi.Type1.GetActualPropertyType(), pi.Type2?.GetActualPropertyType(), enumerable11, enumerable22, options);
-                }
-                else
-                {
-                    results.Add(new CompareResult(false, CreatePath(currentPath, pi.Name, options), GetStringValue(value1, options), GetStringValue(value2, options)));
+                    context.AddNullValueResult(pi.Name);
                 }
             }
             else
             {
-                results.Add(new CompareResult(true, CreatePath(currentPath, pi.Name, options), GetStringValue(value1, options), GetStringValue(value2, options)));
+                if (value1 is not string &&
+                    value1 is IEnumerable enumerable11 && value2 is IEnumerable enumerable22)
+                {
+                    context.SetRootPath(pi.Name);
+                    ProcessCollection(context, pi.Type1.GetActualPropertyType(), pi.Type2?.GetActualPropertyType(), enumerable11, enumerable22);
+                }
+                else
+                {
+                    bool equal = IsEqual(pi.Type1, value1, value2, context.Options);
+                    context.AddResult(equal, pi.Name, value1, value2);
+                }
             }
         }
     }
 
-    private static bool IsEqual(Type type, object? value1, object? value2, ObjectCompareOptions options)
+    private static bool IsEqual(Type? type, object? value1, object? value2, ObjectCompareOptions options)
     {
-        if (options.CustomValueComparers.TryGetValue(type, out var compareLogic))
+        if (type != null && options.CustomValueComparers.TryGetValue(type, out var compareLogic))
         {
             return compareLogic.IsEqual(value1, value2, options);
         }
@@ -199,4 +196,39 @@ public static class ObjectComparer
     }
 
     private record SimpleMemberInfo(string Name, Type Type1, Type Type2, object? Value1, object? Value2);
+
+    internal class CompareContext
+    {
+        private readonly List<CompareResult> results = new();
+        private string currentPath = string.Empty;
+        private string rootPath = string.Empty;
+
+        internal IReadOnlyList<CompareResult> Results => results;
+
+        internal ObjectCompareOptions Options { get; }
+
+        public CompareContext(ObjectCompareOptions options)
+        {
+            Options = options;
+        }
+
+        internal void SetRootPath(string path) => currentPath = rootPath = CreatePath(currentPath, path, Options);
+
+        internal void SetIndexedPath(int index) => currentPath = GetIndexedPath(rootPath, index);
+
+        internal void AddResult(bool equal, string path, object? value1, object? value2) =>
+            results.Add(new CompareResult(equal, CreatePath(currentPath, path, Options), GetStringValue(value1, Options), GetStringValue(value2, Options)));
+        internal void AddNullValueResult(string path) =>
+            results.Add(new CompareResult(true, CreatePath(currentPath, path, Options), Options.ValueFormats.NullValue, Options.ValueFormats.NullValue));
+
+        internal void AddIndexedResult(bool equal, int index, object? value1, object? value2) =>
+            results.Add(new CompareResult(equal, GetIndexedPath(rootPath, index), GetStringValue(value1, Options), GetStringValue(value2, Options)));
+
+        internal void AddCountResults(List<object> list1, List<object> list2)
+        {
+            results.Add(new CompareResult(false, CreatePath(rootPath, nameof(IList.Count), Options), list1.Count.ToString(), list2.Count.ToString()));
+            results.Add(new CompareResult(false, CreatePath(rootPath, nameof(Array.Length), Options), list1.Count.ToString(), list2.Count.ToString()));
+            results.Add(new CompareResult(false, CreatePath(rootPath, nameof(Array.LongLength), Options), list1.Count.ToString(), list2.Count.ToString()));
+        }
+    }
 }

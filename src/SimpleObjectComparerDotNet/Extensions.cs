@@ -23,7 +23,6 @@ internal static class Extensions
 
     internal static Type GetValueType(object? value, MemberInfo memberInfo, SimpleObjectComparerOptions options) => options.CustomValueTypeResolver(value, memberInfo);
 
-
     internal static Type GetUnderlyingType(this MemberInfo member) => (object)member.MemberType switch
     {
         MemberTypes.Event => ((EventInfo)member).EventHandlerType,
