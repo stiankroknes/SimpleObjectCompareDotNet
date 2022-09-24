@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using static SimpleObjectComparerDotNet.Extensions;
 
 namespace SimpleObjectComparerDotNet;
@@ -52,22 +53,11 @@ public static class ObjectComparer
             ProcessProperty(context, type1, type2, instance1, instance2);
         }
     }
-    private readonly struct MemberPath
-    {
-        public MemberPath(string name, bool isIndexer)
-        {
-            Name = name;
-            IsIndexer = isIndexer;
-        }
 
-        public readonly string Name { get; }
-        public readonly bool IsIndexer { get; }        
-    }
 
     private class CompareContext
     {
-        private Stack<MemberPath> stack = new();
-        private List<CompareResult> results = new();
+        private readonly List<CompareResult> results = new();
 
         public IReadOnlyList<CompareResult> Results => results;
         public ObjectCompareOptions Options { get; }
@@ -77,27 +67,40 @@ public static class ObjectComparer
             Options = options;
         }
 
-        public void Pop()
-        {
-            stack.Pop();
-            isIndexPath = false;
-        }
+        private string currentPath = string.Empty;
+        private string path = string.Empty;
+        private bool isIndexPath = false;
 
-        public void Push(string value) => stack.Push(new MemberPath(value, false));
+        //public void Pop()
+        //{
+        //    stack.Pop();
+        //    isIndexPath = false;
+        //}
+
+        //public void Push(string value) => stack.Push(new MemberPath(value, false, Options.PropertyNameSeparator));
 
         //public string Path => string.Join(Options.PropertyNameSeparator, stack);
 
-        private string GetPath() => isIndexPath
-            ? string.Join(Options.PropertyNameSeparator, stack.Reverse()).Replace(".[", "[")
-            : string.Join(Options.PropertyNameSeparator, stack.Reverse()).Replace(".[", "[");
+        private string GetPath() =>
+             !string.IsNullOrEmpty(currentPath)
+                ? string.Concat(currentPath, Options.PropertyNameSeparator, path)
+                : path;
 
 
-        private bool isIndexPath;
+        //private bool isIndexPath;
 
-        internal void PushIndexPath(int idx) => stack.Push(new MemberPath(idx.ToString(CultureInfo.InvariantCulture), true)); // string.Concat('[', idx, ']'));;
-
+        internal void PushIndexPath(int idx)
+        {
+            isIndexPath = true;
+            path = string.Concat(path, '[', idx, ']');
+        }
 
         internal void Add(bool equal, object? value1, object? value2)
+        {
+            results.Add(new CompareResult(equal, GetPath(), GetStringValue(value1, Options), GetStringValue(value2, Options)));
+        }
+
+        internal void AddIndex(bool equal, int index, object? value1, object? value2)
         {
             results.Add(new CompareResult(equal, GetPath(), GetStringValue(value1, Options), GetStringValue(value2, Options)));
         }
@@ -112,6 +115,24 @@ public static class ObjectComparer
             results.Add(new CompareResult(false, GetPath() + '.' + nameof(IList.Count), list1.Count.ToString(), list2.Count.ToString()));
             results.Add(new CompareResult(false, GetPath() + '.' + nameof(Array.Length), list1.Count.ToString(), list2.Count.ToString()));
             results.Add(new CompareResult(false, GetPath() + '.' + nameof(Array.LongLength), list1.Count.ToString(), list2.Count.ToString()));
+        }
+
+        internal void PopIndexPath()
+        {
+            isIndexPath = false;
+            //throw new NotImplementedException();
+        }
+
+        internal void PushPath(string name)
+        {
+            path = isIndexPath
+                ? string.Concat(path, Options.PropertyNameSeparator, name)
+                : name;
+        }
+
+        internal void ClearPath()
+        {
+            path = currentPath;
         }
     }
 
@@ -146,7 +167,7 @@ public static class ObjectComparer
                 context.Add(equal, val1, val2);
             }
 
-            context.Pop();
+            context.PopIndexPath();
         }
 
         bool isListCountEqual = list1.Count == list2.Count;
@@ -167,7 +188,7 @@ public static class ObjectComparer
         {
             var value1 = pi.Value1;
             var value2 = pi.Value2;
-            results.Push(pi.Name);
+            results.PushPath(pi.Name);
 
 
             if (pi.Type1.IsClass && !ClrScope.Contains(pi.Type1.Module.ScopeName))
@@ -206,7 +227,7 @@ public static class ObjectComparer
                 results.Add(true, value1, value2);
             }
 
-            results.Pop();
+            results.ClearPath();
         }
     }
 
