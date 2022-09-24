@@ -79,14 +79,23 @@ public class ObjectMembersCollectorTests
     }
 
     [Fact]
-    public void Should_handle_custom_collections()
+    public void Should_handle_custom_generic_collections()
     {
         var instance = new CustomCollection<string>(new[] { "1" });
 
         var result = ObjectMembersCollector.Collect(instance);
 
         result.Should().BeEquivalentTo(new CollectedPropertyValue(typeof(CustomCollection<string>), typeof(string), "[0]", "1"));
+    }
 
+    [Fact]
+    public void Should_handle_custom_collections()
+    {
+        var instance = new CustomStringCollection(new[] { "1" });
+
+        var result = ObjectMembersCollector.Collect(instance);
+
+        result.Should().BeEquivalentTo(new CollectedPropertyValue(typeof(CustomStringCollection), typeof(string), "[0]", "1"));
     }
 
     private class Simple
@@ -128,5 +137,10 @@ public class ObjectMembersCollectorTests
     {
         public CustomCollection() { }
         public CustomCollection(IEnumerable<T> collection) : base(collection) { }
+    }
+
+    private class CustomStringCollection : List<string>
+    {
+        public CustomStringCollection(IEnumerable<string> collection) : base(collection) { }
     }
 }
