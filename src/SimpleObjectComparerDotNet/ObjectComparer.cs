@@ -60,7 +60,7 @@ public static class ObjectComparer
         var max = Math.Max(list1.Count, list2.Count);
 
         string? scopeName = default;
-        string rootPath = context.CurrentPath;
+        string currentPath = context.CurrentPath;
 
         for (int idx = 0; idx < max; idx++)
         {
@@ -76,7 +76,7 @@ public static class ObjectComparer
             {
                 context.SetIndexedPath(idx);
                 ProcessProperty(context, type1, type2, val1, val2);
-                //context.ClearRootPath(rootPath);
+                context.ClearRootPath(currentPath);
             }
             else
             {
@@ -113,6 +113,7 @@ public static class ObjectComparer
                 {
                     context.SetRootPath(pi.Name);
                     Compare(context, pi.Type1, pi.Type2, value1, value2);
+                    context.ClearRootPath(currentPath);
                 }
                 else if (!IsEqual(pi.Type1, value1, value2, context.Options))
                 {
@@ -136,7 +137,6 @@ public static class ObjectComparer
                 {
                     bool equal = IsEqual(pi.Type1, value1, value2, context.Options);
                     context.AddResult(equal, pi.Name, value1, value2);
-                    //context.SetRootPath(rootPath);
                 }
             }
         }
