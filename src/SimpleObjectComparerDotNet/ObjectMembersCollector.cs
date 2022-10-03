@@ -41,6 +41,7 @@ public static class ObjectMembersCollector
     {
         string? scopeName = null;
         int idx = 0;
+        var currentPath = context.CurrentPath;
 
         foreach (var value in enumerable)
         {
@@ -51,6 +52,7 @@ public static class ObjectMembersCollector
             {
                 context.SetIndexedPath(idx);
                 ProcessProperty(context, type, value);
+                context.ClearRootPath(currentPath);
             }
             else
             {
@@ -81,6 +83,7 @@ public static class ObjectMembersCollector
                 {
                     context.SetRootPath(pi.Name);
                     Collect(context, pi.Type, value);
+                    context.ClearRootPath(currentPath);
                 }
                 else if (!context.Options.IgnoreNullValues)
                 {
