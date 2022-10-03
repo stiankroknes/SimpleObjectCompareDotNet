@@ -111,7 +111,7 @@ public class ValueFormatOptions
 
 public static class SimpleObjectComparerOptionsExtensions
 {
-    internal static TOptions IncludeMemberWithAttribute<TOptions>(this TOptions options, Type attributeType)
+    public static TOptions IncludeMemberWithAttribute<TOptions>(this TOptions options, Type attributeType)
         where TOptions : SimpleObjectComparerOptions
     {
         if (attributeType == null) { throw new ArgumentNullException(nameof(attributeType)); }
@@ -121,7 +121,7 @@ public static class SimpleObjectComparerOptionsExtensions
         return options;
     }
 
-    internal static TOptions ExcludeMemberName<TOptions>(this TOptions options, string name)
+    public static TOptions ExcludeMemberName<TOptions>(this TOptions options, string name)
         where TOptions : SimpleObjectComparerOptions
     {
         if (string.IsNullOrEmpty(name)) { throw new ArgumentException("Exclude name can not be null or empty.", nameof(name)); }
@@ -131,7 +131,7 @@ public static class SimpleObjectComparerOptionsExtensions
         return options;
     }
 
-    internal static TOptions ExcludeMemberName<TOptions>(this TOptions options, IEnumerable<string> memberNames)
+    public static TOptions ExcludeMemberName<TOptions>(this TOptions options, IEnumerable<string> memberNames)
         where TOptions : SimpleObjectComparerOptions
     {
         if (memberNames == null) { throw new ArgumentNullException(nameof(memberNames)); }
