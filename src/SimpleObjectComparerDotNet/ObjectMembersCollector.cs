@@ -69,6 +69,8 @@ public static class ObjectMembersCollector
 
         var possiblePropertiesWithBackingField = properties.Where(p => fields.Any(f => f.Name.EndsWith(p.Name, StringComparison.Ordinal)));
 
+        var currentPath = context.CurrentPath;
+
         foreach (var pi in fields.Concat(properties.Except(possiblePropertiesWithBackingField)))
         {
             var value = pi.Value;
@@ -89,6 +91,7 @@ public static class ObjectMembersCollector
             {
                 context.SetRootPath(pi.Name);
                 ProcessCollection(context, instanceType, enumerable);
+                context.ClearRootPath(currentPath);
             }
             else
             {
@@ -157,7 +160,10 @@ public static class ObjectMembersCollector
             Options = options;
         }
 
+        internal string CurrentPath => currentPath;
+
         internal void SetRootPath(string path) => currentPath = rootPath = CreatePath(currentPath, path, Options);
+        internal void ClearRootPath(string path) => currentPath = rootPath = CreatePath(string.Empty, path, Options);
 
         internal void SetIndexedPath(int index) => currentPath = GetIndexedPath(rootPath, index);
 

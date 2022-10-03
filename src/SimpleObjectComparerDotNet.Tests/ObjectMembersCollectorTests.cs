@@ -32,27 +32,29 @@ public class ObjectMembersCollectorTests
     [Fact]
     public void Should_handle_object_with_collection()
     {
-        var instance = new SimpleCollection { SimpleCollectionTest = "1", Collection = new[] { new Simple { Test = "11" } }.ToList() };
+        var instance = new SimpleCollection { SimpleCollectionTest = "1", Collection = new[] { new Simple { Test = "11" } }.ToList(), OtherProp = "111" };
 
         var result = ObjectMembersCollector.Collect(instance);
 
         result.Should().BeEquivalentTo(
             new CollectedPropertyValue(typeof(SimpleCollection), typeof(string), "SimpleCollectionTest", "1"),
-            new CollectedPropertyValue(typeof(Simple), typeof(string), "Collection[0].Test", "11")
+            new CollectedPropertyValue(typeof(Simple), typeof(string), "Collection[0].Test", "11"),
+            new CollectedPropertyValue(typeof(SimpleCollection), typeof(string), "OtherProp", "111")
         );
     }
 
     [Fact]
     public void Should_handle_object_with_nested_collections()
     {
-        var instance = new CollectionWithNestedCollection { TestCollNestedColl = "1", Collection = new[] { new SimpleCollection { SimpleCollectionTest = "11", Collection = new[] { new Simple { Test = "111" } }.ToList() } }.ToList() };
+        var instance = new CollectionWithNestedCollection { TestCollNestedColl = "1", Collection = new[] { new SimpleCollection { SimpleCollectionTest = "11", Collection = new[] { new Simple { Test = "111" } }.ToList(), OtherProp = "1111" } }.ToList() };
 
         var result = ObjectMembersCollector.Collect(instance);
 
         result.Should().BeEquivalentTo(
             new CollectedPropertyValue(typeof(CollectionWithNestedCollection), typeof(string), "TestCollNestedColl", "1"),
             new CollectedPropertyValue(typeof(SimpleCollection), typeof(string), "Collection[0].SimpleCollectionTest", "11"),
-            new CollectedPropertyValue(typeof(Simple), typeof(string), "Collection[0].Collection[0].Test", "111")
+            new CollectedPropertyValue(typeof(Simple), typeof(string), "Collection[0].Collection[0].Test", "111"),
+            new CollectedPropertyValue(typeof(SimpleCollection), typeof(string), "Collection[0].OtherProp", "1111")
         );
     }
 
@@ -113,6 +115,7 @@ public class ObjectMembersCollectorTests
     {
         public string SimpleCollectionTest { get; set; }
         public List<Simple> Collection { get; set; } = new List<Simple>();
+        public string OtherProp { get; set; }
     }
 
     private class CollectionWithNestedCollection

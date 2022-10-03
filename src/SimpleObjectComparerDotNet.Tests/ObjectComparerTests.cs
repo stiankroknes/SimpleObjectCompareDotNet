@@ -94,48 +94,51 @@ public class ObjectComparerTests
     [Fact]
     public void Should_handle_collection_equal()
     {
-        var result1 = new SimpleCollection { TestCol = "1", Collection = new[] { new Simple { Test = "11" } }.ToList() };
-        var result2 = new SimpleCollection { TestCol = "1", Collection = new[] { new Simple { Test = "11" } }.ToList() };
+        var result1 = new SimpleCollection { OtherProp = "2", TestCol = "1", Collection = new[] { new Simple { Test = "11" } }.ToList() };
+        var result2 = new SimpleCollection { OtherProp = "2", TestCol = "1", Collection = new[] { new Simple { Test = "11" } }.ToList() };
 
         var result = ObjectComparer.ComparePublicMembers(result1, result2);
 
         result.Should().BeEquivalentTo(
             new CompareResult(true, nameof(SimpleCollection.TestCol), result1.TestCol, result2.TestCol),
-            new CompareResult(true, $"{nameof(SimpleCollection.Collection)}[0].{nameof(Simple.Test)}", result1.Collection[0].Test, result2.Collection[0].Test));
+            new CompareResult(true, $"{nameof(SimpleCollection.Collection)}[0].{nameof(Simple.Test)}", result1.Collection[0].Test, result2.Collection[0].Test),
+            new CompareResult(true, nameof(SimpleCollection.OtherProp), result1.OtherProp, result2.OtherProp));
     }
 
     [Fact]
     public void Should_handle_same_collection_reference_equal()
     {
         var collection = new[] { new Simple { Test = "11" } }.ToList();
-        var result1 = new SimpleCollection { TestCol = "1", Collection = collection };
-        var result2 = new SimpleCollection { TestCol = "1", Collection = collection };
+        var result1 = new SimpleCollection { TestCol = "1", Collection = collection, OtherProp = "2" };
+        var result2 = new SimpleCollection { TestCol = "1", Collection = collection, OtherProp = "2" };
 
         var result = ObjectComparer.ComparePublicMembers(result1, result2);
 
         result.Should().BeEquivalentTo(
             new CompareResult(true, nameof(SimpleCollection.TestCol), result1.TestCol, result2.TestCol),
-            new CompareResult(true, $"{nameof(SimpleCollection.Collection)}[0].{nameof(Simple.Test)}", result1.Collection[0].Test, result2.Collection[0].Test));
+            new CompareResult(true, $"{nameof(SimpleCollection.Collection)}[0].{nameof(Simple.Test)}", result1.Collection[0].Test, result2.Collection[0].Test),
+            new CompareResult(true, nameof(SimpleCollection.OtherProp), result1.OtherProp, result2.OtherProp));
     }
 
     [Fact]
     public void Should_handle_collection_not_equal()
     {
-        var result1 = new SimpleCollection { TestCol = "1", Collection = new[] { new Simple { Test = "11" } }.ToList() };
-        var result2 = new SimpleCollection { TestCol = "2", Collection = new[] { new Simple { Test = "22" } }.ToList() };
+        var result1 = new SimpleCollection { TestCol = "1", Collection = new[] { new Simple { Test = "11" } }.ToList(), OtherProp = "111", };
+        var result2 = new SimpleCollection { TestCol = "2", Collection = new[] { new Simple { Test = "22" } }.ToList(), OtherProp = "222", };
 
         var result = ObjectComparer.ComparePublicMembers(result1, result2);
 
         result.Should().BeEquivalentTo(
             new CompareResult(false, nameof(SimpleCollection.TestCol), result1.TestCol, result2.TestCol),
-            new CompareResult(false, $"{nameof(SimpleCollection.Collection)}[0].{nameof(Simple.Test)}", result1.Collection[0].Test, result2.Collection[0].Test));
+            new CompareResult(false, $"{nameof(SimpleCollection.Collection)}[0].{nameof(Simple.Test)}", result1.Collection[0].Test, result2.Collection[0].Test),
+            new CompareResult(false, nameof(SimpleCollection.OtherProp), result1.OtherProp, result2.OtherProp));
     }
 
     [Fact]
     public void Should_handle_collection_not_equal_count_second_hasMore()
     {
         var result1 = new SimpleCollection { TestCol = "1", Collection = new[] { new Simple { Test = "11" } }.ToList() };
-        var result2 = new SimpleCollection { TestCol = "2", Collection = new[] { new Simple { Test = "22" }, new Simple { Test = "222" } }.ToList() };
+        var result2 = new SimpleCollection { TestCol = "2", Collection = new[] { new Simple { Test = "22" }, new Simple { Test = "222" } }.ToList(), OtherProp = "2222" };
 
         var result = ObjectComparer.ComparePublicMembers(result1, result2);
 
@@ -145,15 +148,16 @@ public class ObjectComparerTests
             new CompareResult(false, $"{nameof(SimpleCollection.Collection)}[1].{nameof(Simple.Test)}", "null", result2.Collection[1].Test),
             new CompareResult(false, $"{nameof(SimpleCollection.Collection)}.Count", result1.Collection.Count.ToString(), result2.Collection.Count.ToString()),
             new CompareResult(false, $"{nameof(SimpleCollection.Collection)}.Length", result1.Collection.Count.ToString(), result2.Collection.Count.ToString()),
-            new CompareResult(false, $"{nameof(SimpleCollection.Collection)}.LongLength", result1.Collection.Count.ToString(), result2.Collection.Count.ToString())
+            new CompareResult(false, $"{nameof(SimpleCollection.Collection)}.LongLength", result1.Collection.Count.ToString(), result2.Collection.Count.ToString()),
+            new CompareResult(false, nameof(SimpleCollection.OtherProp), "null", result2.OtherProp)
         );
     }
 
     [Fact]
     public void Should_handle_collection_not_equal_count_first_hasMore()
     {
-        var result1 = new SimpleCollection { TestCol = "1", Collection = new[] { new Simple { Test = "11" }, new Simple { Test = "111" } }.ToList() };
-        var result2 = new SimpleCollection { TestCol = "2", Collection = new[] { new Simple { Test = "22" } }.ToList() };
+        var result1 = new SimpleCollection { TestCol = "1", Collection = new[] { new Simple { Test = "11" }, new Simple { Test = "111" } }.ToList(), OtherProp = "11", };
+        var result2 = new SimpleCollection { TestCol = "2", Collection = new[] { new Simple { Test = "22" } }.ToList(), OtherProp = "22", };
 
         var result = ObjectComparer.ComparePublicMembers(result1, result2);
 
@@ -163,7 +167,8 @@ public class ObjectComparerTests
             new CompareResult(false, $"{nameof(SimpleCollection.Collection)}[1].{nameof(Simple.Test)}", result1.Collection[1].Test, "null"),
             new CompareResult(false, $"{nameof(SimpleCollection.Collection)}.Count", result1.Collection.Count.ToString(), result2.Collection.Count.ToString()),
             new CompareResult(false, $"{nameof(SimpleCollection.Collection)}.Length", result1.Collection.Count.ToString(), result2.Collection.Count.ToString()),
-            new CompareResult(false, $"{nameof(SimpleCollection.Collection)}.LongLength", result1.Collection.Count.ToString(), result2.Collection.Count.ToString())
+            new CompareResult(false, $"{nameof(SimpleCollection.Collection)}.LongLength", result1.Collection.Count.ToString(), result2.Collection.Count.ToString()),
+            new CompareResult(false, nameof(SimpleCollection.OtherProp), result1.OtherProp, result2.OtherProp)
         );
     }
 
@@ -171,27 +176,29 @@ public class ObjectComparerTests
     public void Should_handle_collection_not_equal_first_null_collection()
     {
         var result1 = new SimpleCollection { TestCol = "1", Collection = null };
-        var result2 = new SimpleCollection { TestCol = "2", Collection = new[] { new Simple { Test = "22" } }.ToList() };
+        var result2 = new SimpleCollection { TestCol = "2", Collection = new[] { new Simple { Test = "22" } }.ToList(), OtherProp = "222" };
 
         var result = ObjectComparer.ComparePublicMembers(result1, result2);
 
         result.Should().BeEquivalentTo(
                 new CompareResult(false, nameof(SimpleCollection.TestCol), result1.TestCol, result2.TestCol),
-                new CompareResult(false, $"{nameof(SimpleCollection.Collection)}", "null", result2.Collection.ToString())
+                new CompareResult(false, $"{nameof(SimpleCollection.Collection)}", "null", result2.Collection.ToString()),
+                new CompareResult(false, nameof(SimpleCollection.OtherProp), "null", result2.OtherProp)
         );
     }
 
     [Fact]
     public void Should_handle_collection_not_equal_second_null_collection()
     {
-        var result1 = new SimpleCollection { TestCol = "1", Collection = new[] { new Simple { Test = "11" } }.ToList() };
+        var result1 = new SimpleCollection { TestCol = "1", Collection = new[] { new Simple { Test = "11" } }.ToList(), OtherProp = "111" };
         var result2 = new SimpleCollection { TestCol = "2", Collection = null };
 
         var result = ObjectComparer.ComparePublicMembers(result1, result2);
 
         result.Should().BeEquivalentTo(
                 new CompareResult(false, nameof(SimpleCollection.TestCol), result1.TestCol, result2.TestCol),
-                new CompareResult(false, $"{nameof(SimpleCollection.Collection)}", result1.Collection.ToString(), "null")
+                new CompareResult(false, $"{nameof(SimpleCollection.Collection)}", result1.Collection.ToString(), "null"),
+                new CompareResult(false, nameof(SimpleCollection.OtherProp), result1.OtherProp, "null")
         );
     }
 
@@ -276,8 +283,8 @@ public class ObjectComparerTests
     [Fact]
     public void Should_handle_collection_nested_collection_equal()
     {
-        var result1 = new CollectionWithNestedObjectWithCollection { TestCollNestedColl = "1", Collection = new[] { new SimpleCollection { TestCol = "11", Collection = new[] { new Simple { Test = "111" } }.ToList() } }.ToList() };
-        var result2 = new CollectionWithNestedObjectWithCollection { TestCollNestedColl = "1", Collection = new[] { new SimpleCollection { TestCol = "11", Collection = new[] { new Simple { Test = "111" } }.ToList() } }.ToList() };
+        var result1 = new CollectionWithNestedObjectWithCollection { TestCollNestedColl = "1", Collection = new[] { new SimpleCollection { TestCol = "11", Collection = new[] { new Simple { Test = "111" } }.ToList(), OtherProp = "22", } }.ToList() };
+        var result2 = new CollectionWithNestedObjectWithCollection { TestCollNestedColl = "1", Collection = new[] { new SimpleCollection { TestCol = "11", Collection = new[] { new Simple { Test = "111" } }.ToList(), OtherProp = "22", } }.ToList() };
 
         var result = ObjectComparer.ComparePublicMembers(result1, result2);
 
@@ -285,15 +292,16 @@ public class ObjectComparerTests
          new CompareResult(true, nameof(CollectionWithNestedObjectWithCollection.TestCollNestedColl), result1.TestCollNestedColl, result2.TestCollNestedColl),
          new CompareResult(true, $"{nameof(CollectionWithNestedObject.Collection)}[0].{nameof(SimpleCollection.TestCol)}", result1.Collection[0].TestCol, result2.Collection[0].TestCol),
          new CompareResult(true, $"{nameof(CollectionWithNestedObject.Collection)}[0].{nameof(SimpleCollection.Collection)}[0].{nameof(Simple.Test)}",
-                        result1.Collection[0].Collection[0].Test, result2.Collection[0].Collection[0].Test)
+                        result1.Collection[0].Collection[0].Test, result2.Collection[0].Collection[0].Test),
+            new CompareResult(true, $"{nameof(CollectionWithNestedObject.Collection)}[0].{nameof(SimpleCollection.OtherProp)}", result1.Collection[0].OtherProp, result2.Collection[0].OtherProp)
         );
     }
 
     [Fact]
     public void Should_handle_collection_nested_collection_not_equal()
     {
-        var result1 = new CollectionWithNestedObjectWithCollection { TestCollNestedColl = "1", Collection = new[] { new SimpleCollection { TestCol = "11", Collection = new[] { new Simple { Test = "111" } }.ToList() } }.ToList() };
-        var result2 = new CollectionWithNestedObjectWithCollection { TestCollNestedColl = "2", Collection = new[] { new SimpleCollection { TestCol = "22", Collection = new[] { new Simple { Test = "222" } }.ToList() } }.ToList() };
+        var result1 = new CollectionWithNestedObjectWithCollection { TestCollNestedColl = "1", Collection = new[] { new SimpleCollection { TestCol = "11", Collection = new[] { new Simple { Test = "111" } }.ToList(), OtherProp = "111" } }.ToList() };
+        var result2 = new CollectionWithNestedObjectWithCollection { TestCollNestedColl = "2", Collection = new[] { new SimpleCollection { TestCol = "22", Collection = new[] { new Simple { Test = "222" } }.ToList(), OtherProp = "222" } }.ToList() };
 
         var result = ObjectComparer.ComparePublicMembers(result1, result2);
 
@@ -301,7 +309,8 @@ public class ObjectComparerTests
             new CompareResult(false, nameof(CollectionWithNestedObjectWithCollection.TestCollNestedColl), result1.TestCollNestedColl, result2.TestCollNestedColl),
             new CompareResult(false, $"{nameof(CollectionWithNestedObject.Collection)}[0].{nameof(SimpleCollection.TestCol)}", result1.Collection[0].TestCol, result2.Collection[0].TestCol),
             new CompareResult(false, $"{nameof(CollectionWithNestedObject.Collection)}[0].{nameof(SimpleCollection.Collection)}[0].{nameof(Simple.Test)}",
-            result1.Collection[0].Collection[0].Test, result2.Collection[0].Collection[0].Test)
+            result1.Collection[0].Collection[0].Test, result2.Collection[0].Collection[0].Test),
+            new CompareResult(false, $"{nameof(CollectionWithNestedObject.Collection)}[0].{nameof(SimpleCollection.OtherProp)}", result1.Collection[0].OtherProp, result2.Collection[0].OtherProp)
         );
     }
 
@@ -419,6 +428,7 @@ public class ObjectComparerTests
     {
         public string TestCol { get; set; }
         public List<Simple> Collection { get; set; } = new List<Simple>();
+        public string OtherProp { get; set; }
     }
 
     private class CollectionWithNestedObject

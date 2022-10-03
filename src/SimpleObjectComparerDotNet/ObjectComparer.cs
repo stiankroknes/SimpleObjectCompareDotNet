@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using static SimpleObjectComparerDotNet.Extensions;
@@ -59,6 +60,7 @@ public static class ObjectComparer
         var max = Math.Max(list1.Count, list2.Count);
 
         string? scopeName = default;
+        string rootPath = context.CurrentPath;
 
         for (int idx = 0; idx < max; idx++)
         {
@@ -74,6 +76,7 @@ public static class ObjectComparer
             {
                 context.SetIndexedPath(idx);
                 ProcessProperty(context, type1, type2, val1, val2);
+                //context.ClearRootPath(rootPath);
             }
             else
             {
@@ -96,6 +99,8 @@ public static class ObjectComparer
         var properties = GetProperties(type1, type2, instance1, instance2, context.Options);
 
         var possiblePropertiesWithBackingField = properties.Where(p => fields.Any(field => field.Name.EndsWith(p.Name, StringComparison.Ordinal)));
+
+        var currentPath = context.CurrentPath;
 
         foreach (var pi in fields.Concat(properties.Except(possiblePropertiesWithBackingField)))
         {
@@ -125,11 +130,13 @@ public static class ObjectComparer
                 {
                     context.SetRootPath(pi.Name);
                     ProcessCollection(context, pi.Type1.GetActualPropertyType(), pi.Type2?.GetActualPropertyType(), enumerable11, enumerable22);
+                    context.ClearRootPath(currentPath);
                 }
                 else
                 {
                     bool equal = IsEqual(pi.Type1, value1, value2, context.Options);
                     context.AddResult(equal, pi.Name, value1, value2);
+                    //context.SetRootPath(rootPath);
                 }
             }
         }
@@ -212,7 +219,11 @@ public static class ObjectComparer
             Options = options;
         }
 
+        internal string CurrentPath => currentPath;
+
         internal void SetRootPath(string path) => currentPath = rootPath = CreatePath(currentPath, path, Options);
+
+        internal void ClearRootPath(string path) => currentPath = rootPath = CreatePath(string.Empty, path, Options);
 
         internal void SetIndexedPath(int index) => currentPath = GetIndexedPath(rootPath, index);
 
@@ -229,6 +240,21 @@ public static class ObjectComparer
             results.Add(new CompareResult(false, CreatePath(rootPath, nameof(IList.Count), Options), list1.Count.ToString(), list2.Count.ToString()));
             results.Add(new CompareResult(false, CreatePath(rootPath, nameof(Array.Length), Options), list1.Count.ToString(), list2.Count.ToString()));
             results.Add(new CompareResult(false, CreatePath(rootPath, nameof(Array.LongLength), Options), list1.Count.ToString(), list2.Count.ToString()));
+        }
+
+        internal class IndexedDisposable : IDisposable
+        {
+            private readonly string currentPath;
+
+            public IndexedDisposable(string currentPath)
+            {
+                this.currentPath = currentPath;
+            }
+
+            public void Dispose()
+            {
+
+            }
         }
     }
 }
