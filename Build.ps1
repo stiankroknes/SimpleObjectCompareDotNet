@@ -24,14 +24,15 @@ function Exec
 }
 
 $artifacts = ".\artifacts"
-$coverage = ".\coverage"
-
 if(Test-Path $artifacts) { Remove-Item $artifacts -Force -Recurse }
+
+$coverage = ".\coverage"
+if(Test-Path $coverage) { Remove-Item $coverage -Force -Recurse }
 
 exec { & dotnet clean -c Release }
 
 exec { & dotnet build -c Release }
 
-exec { & dotnet test -c Release -r $artifacts --no-build -l trx --verbosity=normal --collect:"XPlat Code Coverage" --results-directory=$coverage }
+exec { & dotnet test -c Release -r $artifacts --no-build -l trx --verbosity=normal --collect="XPlat Code Coverage" --results-directory=$coverage }
 
 exec { & dotnet pack .\src\SimpleObjectComparerDotNet\SimpleObjectComparerDotNet.csproj -c Release -o $artifacts --no-build }
