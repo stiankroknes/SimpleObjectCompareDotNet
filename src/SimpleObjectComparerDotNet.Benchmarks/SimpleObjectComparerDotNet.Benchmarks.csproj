@@ -4,6 +4,7 @@
 	  <OutputType>Exe</OutputType>
 	  <TargetFrameworks>net6.0</TargetFrameworks>
 	  <LangVersion>Preview</LangVersion>
+	  <IsPackable>false</IsPackable>
 	  <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	  <ServerGarbageCollection>true</ServerGarbageCollection>
   </PropertyGroup>
