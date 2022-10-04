@@ -26,9 +26,6 @@ function Exec
 $artifacts = ".\artifacts"
 if(Test-Path $artifacts) { Remove-Item $artifacts -Force -Recurse }
 
-$testResults = ".\TestResults"
-if(Test-Path $testResults) { Remove-Item $testResults -Force -Recurse }
-
 exec { & dotnet clean -c Release }
 
 exec { & dotnet build -c Release }
