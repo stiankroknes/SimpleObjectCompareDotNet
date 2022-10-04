@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using static SimpleObjectComparerDotNet.Extensions;
@@ -74,14 +73,15 @@ public static class ObjectComparer
 
             if (!ClrScope.Contains(scopeName))
             {
-                context.SetIndexedPath(idx);
-                ProcessProperty(context, type1, type2, val1, val2);
-                context.ClearRootPath(currentPath);
+                using (context.AppendIndexedPath(currentPath, idx))
+                {
+                    ProcessProperty(context, type1, type2, val1, val2);
+                }
             }
             else
             {
                 // Collection of primitives.
-                bool equal = IsEqual((type1 ?? type2), val1, val2, context.Options);
+                bool equal = IsEqual(type1 ?? type2, val1, val2, context.Options);
                 context.AddIndexedResult(equal, idx, val1, val2);
             }
         }
@@ -97,12 +97,11 @@ public static class ObjectComparer
     {
         var fields = GetFields(type1, type2, instance1, instance2, context.Options);
         var properties = GetProperties(type1, type2, instance1, instance2, context.Options);
-
-        var possiblePropertiesWithBackingField = properties.Where(p => fields.Any(field => field.Name.EndsWith(p.Name, StringComparison.Ordinal)));
+        var possibleBackingFields = fields.Where(field => properties.Any(prop => field.Name.EndsWith(prop.Name, StringComparison.OrdinalIgnoreCase)));
 
         var currentPath = context.CurrentPath;
 
-        foreach (var pi in fields.Concat(properties.Except(possiblePropertiesWithBackingField)))
+        foreach (var pi in properties.Concat(fields.Except(possibleBackingFields)))
         {
             var value1 = pi.Value1;
             var value2 = pi.Value2;
@@ -111,9 +110,10 @@ public static class ObjectComparer
             {
                 if (value1 != null && value2 != null)
                 {
-                    context.SetRootPath(pi.Name);
-                    Compare(context, pi.Type1, pi.Type2, value1, value2);
-                    context.ClearRootPath(currentPath);
+                    using (context.AppendPath(currentPath, pi.Name))
+                    {
+                        Compare(context, pi.Type1, pi.Type2, value1, value2);
+                    }
                 }
                 else if (!IsEqual(pi.Type1, value1, value2, context.Options))
                 {
@@ -121,7 +121,7 @@ public static class ObjectComparer
                 }
                 else if (value1 == null && value2 == null)
                 {
-                    context.AddNullValueResult(pi.Name);
+                    context.TryAddNullValueResult(pi.Name);
                 }
             }
             else
@@ -129,14 +129,22 @@ public static class ObjectComparer
                 if (value1 is not string &&
                     value1 is IEnumerable enumerable11 && value2 is IEnumerable enumerable22)
                 {
-                    context.SetRootPath(pi.Name);
-                    ProcessCollection(context, pi.Type1.GetActualPropertyType(), pi.Type2?.GetActualPropertyType(), enumerable11, enumerable22);
-                    context.ClearRootPath(currentPath);
+                    using (context.AppendPath(currentPath, pi.Name))
+                    {
+                        ProcessCollection(context, pi.Type1.GetActualPropertyType(), pi.Type2?.GetActualPropertyType(), enumerable11, enumerable22);
+                    }
                 }
                 else
                 {
-                    bool equal = IsEqual(pi.Type1, value1, value2, context.Options);
-                    context.AddResult(equal, pi.Name, value1, value2);
+                    if (value1 == null && value2 == null)
+                    {
+                        context.TryAddNullValueResult(pi.Name);
+                    }
+                    else
+                    {
+                        bool equal = IsEqual(pi.Type1, value1, value2, context.Options);
+                        context.AddResult(equal, pi.Name, value1, value2);
+                    }
                 }
             }
         }
@@ -202,13 +210,14 @@ public static class ObjectComparer
         }
     }
 
-    private record SimpleMemberInfo(string Name, Type Type1, Type Type2, object? Value1, object? Value2);
+    private sealed record SimpleMemberInfo(string Name, Type Type1, Type Type2, object? Value1, object? Value2);
 
-    internal class CompareContext
+    internal sealed class CompareContext
     {
         private readonly List<CompareResult> results = new();
+        private string actualPath = string.Empty;
         private string currentPath = string.Empty;
-        private string rootPath = string.Empty;
+        private readonly PathDisposable pathDisposable;
 
         internal IReadOnlyList<CompareResult> Results => results;
 
@@ -217,44 +226,62 @@ public static class ObjectComparer
         public CompareContext(ObjectCompareOptions options)
         {
             Options = options;
+            pathDisposable = new PathDisposable(this);
         }
 
-        internal string CurrentPath => currentPath;
+        internal string CurrentPath => actualPath;
 
-        internal void SetRootPath(string path) => currentPath = rootPath = CreatePath(currentPath, path, Options);
+        internal IDisposable AppendPath(string startingPath, string path)
+        {
+            actualPath = currentPath = CreatePath(actualPath, path, Options);
+            return pathDisposable.FromPath(startingPath);
+        }
 
-        internal void ClearRootPath(string path) => currentPath = rootPath = CreatePath(string.Empty, path, Options);
+        internal IDisposable AppendIndexedPath(string startingPath, int index)
+        {
+            actualPath = GetIndexedPath(currentPath, index);
+            return pathDisposable.FromPath(startingPath);
+        }
 
-        internal void SetIndexedPath(int index) => currentPath = GetIndexedPath(rootPath, index);
+        private void ResetPath(string startingPath) =>
+            actualPath = currentPath = CreatePath(string.Empty, startingPath, Options);
 
         internal void AddResult(bool equal, string path, object? value1, object? value2) =>
-            results.Add(new CompareResult(equal, CreatePath(currentPath, path, Options), GetStringValue(value1, Options), GetStringValue(value2, Options)));
-        internal void AddNullValueResult(string path) =>
-            results.Add(new CompareResult(true, CreatePath(currentPath, path, Options), Options.ValueFormats.NullValue, Options.ValueFormats.NullValue));
+            results.Add(new CompareResult(equal, CreatePath(actualPath, path, Options), GetStringValue(value1, Options), GetStringValue(value2, Options)));
+
+        internal void TryAddNullValueResult(string path)
+        {
+            if (!Options.IgnoreNullValues)
+            {
+                results.Add(new CompareResult(true, CreatePath(actualPath, path, Options), Options.ValueFormats.NullValue, Options.ValueFormats.NullValue));
+            }
+        }
 
         internal void AddIndexedResult(bool equal, int index, object? value1, object? value2) =>
-            results.Add(new CompareResult(equal, GetIndexedPath(rootPath, index), GetStringValue(value1, Options), GetStringValue(value2, Options)));
+            results.Add(new CompareResult(equal, GetIndexedPath(currentPath, index), GetStringValue(value1, Options), GetStringValue(value2, Options)));
 
         internal void AddCountResults(List<object> list1, List<object> list2)
         {
-            results.Add(new CompareResult(false, CreatePath(rootPath, nameof(IList.Count), Options), list1.Count.ToString(), list2.Count.ToString()));
-            results.Add(new CompareResult(false, CreatePath(rootPath, nameof(Array.Length), Options), list1.Count.ToString(), list2.Count.ToString()));
-            results.Add(new CompareResult(false, CreatePath(rootPath, nameof(Array.LongLength), Options), list1.Count.ToString(), list2.Count.ToString()));
+            results.Add(new CompareResult(false, CreatePath(currentPath, nameof(IList.Count), Options), list1.Count.ToString(), list2.Count.ToString()));
+            results.Add(new CompareResult(false, CreatePath(currentPath, nameof(Array.Length), Options), list1.Count.ToString(), list2.Count.ToString()));
+            results.Add(new CompareResult(false, CreatePath(currentPath, nameof(Array.LongLength), Options), list1.Count.ToString(), list2.Count.ToString()));
         }
 
-        internal class IndexedDisposable : IDisposable
+        private sealed class PathDisposable : IDisposable
         {
-            private readonly string currentPath;
+            private readonly CompareContext context;
+            private readonly Stack<string> paths = new();
 
-            public IndexedDisposable(string currentPath)
+            public PathDisposable(CompareContext context) => this.context = context;
+
+            public IDisposable FromPath(string currentPath)
             {
-                this.currentPath = currentPath;
+                paths.Push(currentPath);
+                return this;
             }
 
-            public void Dispose()
-            {
-
-            }
+            // Note: It is intended to reuse this disposable.
+            public void Dispose() => context.ResetPath(paths.Pop());
         }
     }
 }
