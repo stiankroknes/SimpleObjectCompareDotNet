@@ -81,7 +81,7 @@ public static class ObjectComparer
             else
             {
                 // Collection of primitives.
-                bool equal = IsEqual((type1 ?? type2), val1, val2, context.Options);
+                bool equal = IsEqual(type1 ?? type2, val1, val2, context.Options);
                 context.AddIndexedResult(equal, idx, val1, val2);
             }
         }
@@ -97,12 +97,11 @@ public static class ObjectComparer
     {
         var fields = GetFields(type1, type2, instance1, instance2, context.Options);
         var properties = GetProperties(type1, type2, instance1, instance2, context.Options);
-
-        var possiblePropertiesWithBackingField = properties.Where(p => fields.Any(field => field.Name.EndsWith(p.Name, StringComparison.Ordinal)));
+        var possibleBackingFields = fields.Where(field => properties.Any(prop => field.Name.EndsWith(prop.Name, StringComparison.OrdinalIgnoreCase)));
 
         var currentPath = context.CurrentPath;
 
-        foreach (var pi in fields.Concat(properties.Except(possiblePropertiesWithBackingField)))
+        foreach (var pi in properties.Concat(fields.Except(possibleBackingFields)))
         {
             var value1 = pi.Value1;
             var value2 = pi.Value2;
@@ -122,7 +121,7 @@ public static class ObjectComparer
                 }
                 else if (value1 == null && value2 == null)
                 {
-                    context.AddNullValueResult(pi.Name);
+                    context.TryAddNullValueResult(pi.Name);
                 }
             }
             else
@@ -137,8 +136,15 @@ public static class ObjectComparer
                 }
                 else
                 {
-                    bool equal = IsEqual(pi.Type1, value1, value2, context.Options);
-                    context.AddResult(equal, pi.Name, value1, value2);
+                    if (value1 == null && value2 == null)
+                    {
+                        context.TryAddNullValueResult(pi.Name);
+                    }
+                    else
+                    {
+                        bool equal = IsEqual(pi.Type1, value1, value2, context.Options);
+                        context.AddResult(equal, pi.Name, value1, value2);
+                    }
                 }
             }
         }
@@ -242,8 +248,14 @@ public static class ObjectComparer
 
         internal void AddResult(bool equal, string path, object? value1, object? value2) =>
             results.Add(new CompareResult(equal, CreatePath(actualPath, path, Options), GetStringValue(value1, Options), GetStringValue(value2, Options)));
-        internal void AddNullValueResult(string path) =>
-            results.Add(new CompareResult(true, CreatePath(actualPath, path, Options), Options.ValueFormats.NullValue, Options.ValueFormats.NullValue));
+
+        internal void TryAddNullValueResult(string path)
+        {
+            if (!Options.IgnoreNullValues)
+            {
+                results.Add(new CompareResult(true, CreatePath(actualPath, path, Options), Options.ValueFormats.NullValue, Options.ValueFormats.NullValue));
+            }
+        }
 
         internal void AddIndexedResult(bool equal, int index, object? value1, object? value2) =>
             results.Add(new CompareResult(equal, GetIndexedPath(currentPath, index), GetStringValue(value1, Options), GetStringValue(value2, Options)));

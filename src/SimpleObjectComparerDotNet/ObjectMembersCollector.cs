@@ -70,11 +70,11 @@ public static class ObjectMembersCollector
         var fields = GetFields(instance, instanceType, context.Options);
         var properties = GetProperties(instance, instanceType, context.Options);
 
-        var possiblePropertiesWithBackingField = properties.Where(p => fields.Any(f => f.Name.EndsWith(p.Name, StringComparison.Ordinal)));
+        var possibleBackingFields = fields.Where(field => properties.Any(prop => field.Name.EndsWith(prop.Name, StringComparison.OrdinalIgnoreCase)));
 
         var currentPath = context.CurrentPath;
 
-        foreach (var pi in fields.Concat(properties.Except(possiblePropertiesWithBackingField)))
+        foreach (var pi in properties.Concat(fields.Except(possibleBackingFields)))
         {
             var value = pi.Value;
 
