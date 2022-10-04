@@ -43,7 +43,7 @@ jobs:
         recreate: true
         path: code-coverage-results.md
         
-      - name: Artifacts
+    - name: Artifacts
       uses: actions/upload-artifact@v2
       with:
         name: artifacts
