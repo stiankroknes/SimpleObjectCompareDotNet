@@ -50,9 +50,10 @@ public static class ObjectMembersCollector
 
             if (!ClrScope.Contains(scopeName))
             {
-                context.SetIndexedPath(idx);
-                ProcessProperty(context, type, value);
-                context.ClearRootPath(currentPath);
+                using (context.AppendIndexedPath(currentPath, idx))
+                {
+                    ProcessProperty(context, type, value);
+                }
             }
             else
             {
@@ -81,9 +82,10 @@ public static class ObjectMembersCollector
             {
                 if (value != null)
                 {
-                    context.SetRootPath(pi.Name);
-                    Collect(context, pi.Type, value);
-                    context.ClearRootPath(currentPath);
+                    using (context.AppendPath(currentPath, pi.Name))
+                    {
+                        Collect(context, pi.Type, value);
+                    }
                 }
                 else if (!context.Options.IgnoreNullValues)
                 {
@@ -92,9 +94,10 @@ public static class ObjectMembersCollector
             }
             else if (value is not string && value is IEnumerable enumerable)
             {
-                context.SetRootPath(pi.Name);
-                ProcessCollection(context, instanceType, enumerable);
-                context.ClearRootPath(currentPath);
+                using (context.AppendPath(currentPath, pi.Name))
+                {
+                    ProcessCollection(context, instanceType, enumerable);
+                }
             }
             else
             {
@@ -151,8 +154,9 @@ public static class ObjectMembersCollector
     internal class CollectorContext
     {
         private readonly List<CollectedPropertyValue> results = new();
+        private string actualPath = string.Empty;
         private string currentPath = string.Empty;
-        private string rootPath = string.Empty;
+        private readonly PathDisposable pathDisposable;
 
         internal IReadOnlyList<CollectedPropertyValue> Results => results;
 
@@ -161,22 +165,50 @@ public static class ObjectMembersCollector
         public CollectorContext(ObjectMembersCollectorOptions options)
         {
             Options = options;
+            pathDisposable = new PathDisposable(this);
         }
 
-        internal string CurrentPath => currentPath;
+        internal string CurrentPath => actualPath;
 
-        internal void SetRootPath(string path) => currentPath = rootPath = CreatePath(currentPath, path, Options);
-        internal void ClearRootPath(string path) => currentPath = rootPath = CreatePath(string.Empty, path, Options);
 
-        internal void SetIndexedPath(int index) => currentPath = GetIndexedPath(rootPath, index);
+        internal IDisposable AppendPath(string startingPath, string path)
+        {
+            actualPath = currentPath = CreatePath(actualPath, path, Options);
+            return pathDisposable.FromPath(startingPath);
+        }
+
+        internal IDisposable AppendIndexedPath(string startingPath, int index)
+        {
+            actualPath = GetIndexedPath(currentPath, index);
+            return pathDisposable.FromPath(startingPath);
+        }
+
+        private void ResetPath(string startingPath) => actualPath = currentPath = CreatePath(string.Empty, startingPath, Options);
 
         internal void Add(Type instanceType, Type type, string path, object? value) =>
-            results.Add(new CollectedPropertyValue(instanceType, type, CreatePath(currentPath, path, Options), GetStringValue(value, Options)));
+            results.Add(new CollectedPropertyValue(instanceType, type, CreatePath(actualPath, path, Options), GetStringValue(value, Options)));
 
         internal void AddNull(Type instanceType, Type type, string path) =>
-            results.Add(new CollectedPropertyValue(instanceType, type, CreatePath(currentPath, path, Options), Options.ValueFormats.NullValue));
+            results.Add(new CollectedPropertyValue(instanceType, type, CreatePath(actualPath, path, Options), Options.ValueFormats.NullValue));
 
         internal void AddIndexed(Type instanceType, Type type, int index, object? value) =>
-            results.Add(new CollectedPropertyValue(instanceType, type, GetIndexedPath(rootPath, index), GetStringValue(value, Options)));
+            results.Add(new CollectedPropertyValue(instanceType, type, GetIndexedPath(currentPath, index), GetStringValue(value, Options)));
+
+        private sealed class PathDisposable : IDisposable
+        {
+            private readonly CollectorContext context;
+            private readonly Stack<string> paths = new();
+
+            public PathDisposable(CollectorContext context) => this.context = context;
+
+            public IDisposable FromPath(string currentPath)
+            {
+                paths.Push(currentPath);
+                return this;
+            }
+
+            // Note: It is intended to reuse this disposable.
+            public void Dispose() => context.ResetPath(paths.Pop());
+        }
     }
 }
