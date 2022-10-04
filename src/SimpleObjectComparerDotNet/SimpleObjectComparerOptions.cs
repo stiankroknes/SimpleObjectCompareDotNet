@@ -111,6 +111,14 @@ public class ValueFormatOptions
 
 public static class SimpleObjectComparerOptionsExtensions
 {
+    /// <summary>
+    /// Instruct comparison to include members with given attribute defined.
+    /// </summary>
+    /// <typeparam name="TOptions"></typeparam>
+    /// <param name="options">The options instance.</param>
+    /// <param name="attributeType">The attribute type.</param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
     public static TOptions IncludeMemberWithAttribute<TOptions>(this TOptions options, Type attributeType)
         where TOptions : SimpleObjectComparerOptions
     {
@@ -121,6 +129,14 @@ public static class SimpleObjectComparerOptionsExtensions
         return options;
     }
 
+    /// <summary>
+    /// Add exclude member by name.
+    /// </summary>
+    /// <typeparam name="TOptions"></typeparam>
+    /// <param name="options">The options instance.</param>
+    /// <param name="name">Name of member to exclude from comparison.</param>
+    /// <returns>The options instance.</returns>
+    /// <exception cref="ArgumentException"></exception>
     public static TOptions ExcludeMemberName<TOptions>(this TOptions options, string name)
         where TOptions : SimpleObjectComparerOptions
     {
@@ -131,6 +147,14 @@ public static class SimpleObjectComparerOptionsExtensions
         return options;
     }
 
+    /// <summary>
+    /// Exclude members by range of names.
+    /// </summary>
+    /// <typeparam name="TOptions"></typeparam>
+    /// <param name="options">The options instance.</param>
+    /// <param name="memberNames">All the member names to exclude from comparison.</param>
+    /// <returns>The options instance.</returns>
+    /// <exception cref="ArgumentNullException"></exception>
     public static TOptions ExcludeMemberName<TOptions>(this TOptions options, IEnumerable<string> memberNames)
         where TOptions : SimpleObjectComparerOptions
     {
