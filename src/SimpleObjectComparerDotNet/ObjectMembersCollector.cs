@@ -152,9 +152,9 @@ public static class ObjectMembersCollector
         return simpleInfos;
     }
 
-    private record SimpleMemberInfo(string Name, Type Type, object? Value);
+    private sealed record SimpleMemberInfo(string Name, Type Type, object? Value);
 
-    internal class CollectorContext
+    internal sealed class CollectorContext
     {
         private readonly List<CollectedPropertyValue> results = new();
         private string actualPath = string.Empty;
@@ -168,6 +168,12 @@ public static class ObjectMembersCollector
         public CollectorContext(ObjectMembersCollectorOptions options)
         {
             Options = options;
+
+            if (!string.IsNullOrWhiteSpace(options.RootPathPrefix))
+            {
+                currentPath = actualPath = options.RootPathPrefix;
+            }
+
             pathDisposable = new PathDisposable(this);
         }
 
