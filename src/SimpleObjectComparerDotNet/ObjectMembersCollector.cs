@@ -27,7 +27,8 @@ public static class ObjectMembersCollector
         where TType : class
     {
         if (instance is not string &&
-            instance is IEnumerable enumerable)
+            instance is IEnumerable enumerable &&
+            context.Options.EnumerableFilter(enumerable))
         {
             ProcessCollection(context, instanceType, enumerable);
         }
@@ -92,7 +93,9 @@ public static class ObjectMembersCollector
                     context.AddNull(instanceType, pi.Type, pi.Name);
                 }
             }
-            else if (value is not string && value is IEnumerable enumerable)
+            else if (value is not string &&
+                value is IEnumerable enumerable &&
+                context.Options.EnumerableFilter(enumerable))
             {
                 using (context.AppendPath(currentPath, pi.Name))
                 {
