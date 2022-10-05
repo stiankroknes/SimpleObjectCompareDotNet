@@ -6,5 +6,8 @@ namespace SimpleObjectComparerDotNet;
 /// <value></value>
 public class ObjectMembersCollectorOptions : SimpleObjectComparerOptions
 {
-
+    /// <summary>
+    /// When configured all paths will start with this prefix.
+    /// </summary>
+    public string RootPathPrefix { get; set; } = default!;
 }
