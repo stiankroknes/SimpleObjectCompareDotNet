@@ -100,6 +100,20 @@ public class ObjectMembersCollectorTests
         result.Should().BeEquivalentTo(new CollectedPropertyValue(typeof(CustomStringCollection), typeof(string), "[0]", "1"));
     }
 
+    [Fact]
+    public void Should_allow_set_rootpath_prefix()
+    {
+        var instance = new Simple { Test = "1" };
+
+        var result = ObjectMembersCollector.Collect(instance, configure =>
+        {
+            configure.RootPathPrefix = nameof(Simple);
+        });
+
+        result.Should().BeEquivalentTo(new CollectedPropertyValue(typeof(Simple), typeof(string), $"{nameof(Simple)}.Test", "1"));
+    }
+
+
     private class Simple
     {
         public string Test { get; set; }
