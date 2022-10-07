@@ -3,7 +3,6 @@
   <PropertyGroup>
 	  <OutputType>Exe</OutputType>
 	  <TargetFrameworks>net6.0</TargetFrameworks>
-	  <LangVersion>Preview</LangVersion>
 	  <IsPackable>false</IsPackable>
 	  <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	  <ServerGarbageCollection>true</ServerGarbageCollection>
@@ -12,9 +11,9 @@
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.13.2" />
   </ItemGroup>
-
+  
   <ItemGroup>
-    <ProjectReference Include="..\SimpleObjectComparerDotNet\SimpleObjectComparerDotNet.csproj" />
+    <ProjectReference Include="..\..\src\SimpleObjectComparerDotNet\SimpleObjectComparerDotNet.csproj" />
   </ItemGroup>
 
-</Project>
+</Project>  
