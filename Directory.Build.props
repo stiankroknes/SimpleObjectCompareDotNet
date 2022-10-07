@@ -1,0 +1,16 @@
+<Project>
+  <PropertyGroup>
+    <Product>SimpleObjectComparerDotNet</Product>
+    <Copyright>Copyright Stian Kroknes (c) 2022</Copyright>
+    <LangVersion>preview</LangVersion>
+    <Features>strict</Features>
+  </PropertyGroup>
+
+  <!-- Warnings and errors -->
+  <PropertyGroup>
+    <!-- <NoWarn>$(NoWarn);CS1701;CS1702;CS1591</NoWarn> -->
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!-- Don't make missing XML docs a fatal build error, but still surface so we have visibility into undocumented APIs. -->
+    <WarningsNotAsErrors>$(WarningsNotAsErrors);CS1591</WarningsNotAsErrors>
+  </PropertyGroup>
+</Project>
