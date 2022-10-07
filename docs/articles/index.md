@@ -35,4 +35,4 @@ var result = ObjectMembersCollector.Collect(instance);
 
 ### 5. Explore the tests on GitHub:
 
- - [Tests](https://github.com/stiankroknes/SimpleObjectCompareDotNet/tree/main/src/SimpleObjectComparerDotNet.Tests) 
+ - [Tests](https://github.com/stiankroknes/SimpleObjectCompareDotNet/tree/main/tests) 
