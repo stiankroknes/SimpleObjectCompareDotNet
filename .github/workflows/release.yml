@@ -25,16 +25,80 @@ jobs:
       run: ./Build.ps1
       shell: pwsh
 
-    - name: Push to NuGet
-      env:
-        NUGET_URL: https://api.nuget.org/v3/index.json
-        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-      run: ./Push.ps1
-      shell: pwsh
-
-    - name: Artifacts
-      uses: actions/upload-artifact@v2
+    - name: Code Coverage Report
+      uses: irongut/CodeCoverageSummary@v1.3.0
       with:
-        name: artifacts
-        path: artifacts/**/*
-        
+        filename: coverage/**/coverage.cobertura.xml
+        badge: true
+        fail_below_min: false
+        format: markdown
+        hide_branch_rate: false
+        hide_complexity: false
+        indicators: true
+        output: both
+        thresholds: '60 80'
+
+    - name: Upload Push script
+      uses: actions/upload-artifact@v3
+      with:
+        name: push-script
+        path: push.ps1
+
+    - name: Upload Test Report Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage
+        path: code-coverage-results.md
+
+    - name: Upload Nuget Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: release-nuget
+        path: ./artifacts
+
+  deploy-nuget:
+    runs-on: ubuntu-latest
+    name: Deploy to NuGet Packages
+    needs: [build]
+
+    steps:
+      - name: Download push script
+        uses: actions/download-artifact@v2
+        with:
+           name: push-script
+      
+      - name: Download Test Report Artifact
+        uses: actions/download-artifact@v2
+        with:
+           name: coverage
+
+      - name: Download NuGet Artifact
+        uses: actions/download-artifact@v2
+        with:
+           name: release-nuget
+           path: artifacts
+
+      - name: Push to Nuget Pkg GitHub
+        env:
+          NUGET_URL: https://api.nuget.org/v3/index.json
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: ./Push.ps1
+        shell: pwsh
+
+  deploy-docs:
+    name: Deploy Docs
+    needs: [build, deploy-nuget]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build Documentation
+      uses: nikeee/docfx-action@v1.0.0
+      with:
+        args: docs/docfx.json
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs/_site        
