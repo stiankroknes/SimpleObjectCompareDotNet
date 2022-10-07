@@ -1,4 +1,5 @@
 using FluentAssertions;
+using SimpleObjectComparerDotNet.Tests.Support;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -636,6 +637,36 @@ public class ObjectComparerTests
                 new CompareResult(true, $"{nameof(TestFormats.DateTimeOffset1)}", result1.DateTimeOffset1.ToString(defaultOptions.DateTimeValueFormat), result2.DateTimeOffset1.ToString(defaultOptions.DateTimeValueFormat)));
         }
 
+        [Fact]
+        public void Should_allow_set_rootpath_prefix()
+        {
+            var instance1 = new Simple { Test = "1" };
+            var instance2 = new Simple { Test = "1" };
+
+            var result = ObjectComparer.ComparePublicMembers(instance1, instance2, configure =>
+            {
+                configure.RootPathPrefix = nameof(Simple);
+            });
+
+            result.Should().BeEquivalentTo(
+                new CompareResult(true, $"{nameof(Simple)}.{nameof(Simple.Test)}", instance1.Test.ToString(), instance1.Test.ToString()));
+        }
+
+        [Fact]
+        public void Should_allow_ignore_enumerable_class()
+        {
+            var instance1 = new EnumerableClass { Test1 = "1", Test2 = "2" };
+            var instance2 = new EnumerableClass { Test1 = "1", Test2 = "2" };
+
+            var result = ObjectComparer.ComparePublicMembers(instance1, instance2, configure =>
+            {
+                configure.EnumerableFilter = enumerable => enumerable is not IEnumerable<KeyValuePair<string, object>>;
+            });
+
+            result.Should().BeEquivalentTo(
+                new CompareResult(true, $"{nameof(EnumerableClass.Test1)}", instance1.Test1.ToString(), instance1.Test1.ToString()),
+                new CompareResult(true, $"{nameof(EnumerableClass.Test2)}", instance1.Test2.ToString(), instance2.Test2.ToString()));
+        }
 
         private class TestFormats
         {

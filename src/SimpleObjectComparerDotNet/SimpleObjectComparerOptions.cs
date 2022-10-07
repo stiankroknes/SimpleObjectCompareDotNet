@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -41,6 +42,11 @@ public abstract class SimpleObjectComparerOptions
     public string PropertyNameSeparator { get; set; }
 
     /// <summary>
+    /// When configured all paths will start with this prefix.
+    /// </summary>
+    public string RootPathPrefix { get; set; } = default!;
+
+    /// <summary>
     /// Options for different value formats.
     /// </summary>
     public ValueFormatOptions ValueFormats { get; set; }
@@ -61,6 +67,11 @@ public abstract class SimpleObjectComparerOptions
     public Func<object?, MemberInfo, object?> CustomValueResolver { get; set; }
 
     /// <summary>
+    /// Filter action to be able to control which IEnumerable the collector enumerates, default is true. Action returns true to enumerate, otherwise false.
+    /// </summary>
+    public Func<IEnumerable, bool> EnumerableFilter { get; set; }
+
+    /// <summary>
     /// Create options with default options.
     /// </summary>
     public SimpleObjectComparerOptions()
@@ -68,6 +79,7 @@ public abstract class SimpleObjectComparerOptions
         CustomValueResolver = DefaultPropertyValueCallbacks.ValueResolver;
         CustomValueToStringResolver = DefaultPropertyValueCallbacks.StringValueResolver;
         CustomValueTypeResolver = DefaultPropertyValueCallbacks.ValueTypeResolver;
+        EnumerableFilter = e => true;
         ValueFormats = new ValueFormatOptions();
         ExcludeMembersWithName = new HashSet<string>(StringComparer.Ordinal);
         IncludeMembersWithAttribute = new HashSet<Type>();

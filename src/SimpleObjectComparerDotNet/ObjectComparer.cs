@@ -39,7 +39,8 @@ public static class ObjectComparer
     private static void Compare(CompareContext context, Type? type1, Type? type2, object? instance1, object? instance2)
     {
         if (instance1 is not string &&
-            instance1 is IEnumerable enumerable1 && instance2 is IEnumerable enumerable2)
+            instance1 is IEnumerable enumerable1 && instance2 is IEnumerable enumerable2 &&
+            context.Options.EnumerableFilter(enumerable1) /* consider if we should also check enumerable2? */ )
         {
             var actualType1 = type1?.GetActualPropertyType();
             var actualType2 = type2?.GetActualPropertyType();
@@ -127,11 +128,12 @@ public static class ObjectComparer
             else
             {
                 if (value1 is not string &&
-                    value1 is IEnumerable enumerable11 && value2 is IEnumerable enumerable22)
+                    value1 is IEnumerable enumerable1 && value2 is IEnumerable enumerable2 &&
+                    context.Options.EnumerableFilter(enumerable1) /* consider if we should also check enumerable2? */ )
                 {
                     using (context.AppendPath(currentPath, pi.Name))
                     {
-                        ProcessCollection(context, pi.Type1.GetActualPropertyType(), pi.Type2?.GetActualPropertyType(), enumerable11, enumerable22);
+                        ProcessCollection(context, pi.Type1.GetActualPropertyType(), pi.Type2?.GetActualPropertyType(), enumerable1, enumerable2);
                     }
                 }
                 else
@@ -226,6 +228,12 @@ public static class ObjectComparer
         public CompareContext(ObjectCompareOptions options)
         {
             Options = options;
+
+            if (!string.IsNullOrWhiteSpace(options.RootPathPrefix))
+            {
+                currentPath = actualPath = options.RootPathPrefix;
+            }
+
             pathDisposable = new PathDisposable(this);
         }
 
