@@ -1,0 +1,605 @@
+### YamlMime:XRefMap
+sorted: true
+references:
+- uid: SimpleObjectComparerDotNet
+  name: SimpleObjectComparerDotNet
+  href: api/SimpleObjectComparerDotNet.html
+  commentId: N:SimpleObjectComparerDotNet
+  fullName: SimpleObjectComparerDotNet
+  nameWithType: SimpleObjectComparerDotNet
+- uid: SimpleObjectComparerDotNet.CollectedPropertyValue
+  name: CollectedPropertyValue
+  href: api/SimpleObjectComparerDotNet.CollectedPropertyValue.html
+  commentId: T:SimpleObjectComparerDotNet.CollectedPropertyValue
+  fullName: SimpleObjectComparerDotNet.CollectedPropertyValue
+  nameWithType: CollectedPropertyValue
+- uid: SimpleObjectComparerDotNet.CollectedPropertyValue.#ctor(Type,Type,System.String,System.String)
+  name: CollectedPropertyValue(Type, Type, String, String)
+  href: api/SimpleObjectComparerDotNet.CollectedPropertyValue.html#SimpleObjectComparerDotNet_CollectedPropertyValue__ctor_Type_Type_System_String_System_String_
+  commentId: M:SimpleObjectComparerDotNet.CollectedPropertyValue.#ctor(Type,Type,System.String,System.String)
+  fullName: SimpleObjectComparerDotNet.CollectedPropertyValue.CollectedPropertyValue(Type, Type, System.String, System.String)
+  nameWithType: CollectedPropertyValue.CollectedPropertyValue(Type, Type, String, String)
+- uid: SimpleObjectComparerDotNet.CollectedPropertyValue.#ctor*
+  name: CollectedPropertyValue
+  href: api/SimpleObjectComparerDotNet.CollectedPropertyValue.html#SimpleObjectComparerDotNet_CollectedPropertyValue__ctor_
+  commentId: Overload:SimpleObjectComparerDotNet.CollectedPropertyValue.#ctor
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.CollectedPropertyValue.CollectedPropertyValue
+  nameWithType: CollectedPropertyValue.CollectedPropertyValue
+- uid: SimpleObjectComparerDotNet.CollectedPropertyValue.Name
+  name: Name
+  href: api/SimpleObjectComparerDotNet.CollectedPropertyValue.html#SimpleObjectComparerDotNet_CollectedPropertyValue_Name
+  commentId: P:SimpleObjectComparerDotNet.CollectedPropertyValue.Name
+  fullName: SimpleObjectComparerDotNet.CollectedPropertyValue.Name
+  nameWithType: CollectedPropertyValue.Name
+- uid: SimpleObjectComparerDotNet.CollectedPropertyValue.Name*
+  name: Name
+  href: api/SimpleObjectComparerDotNet.CollectedPropertyValue.html#SimpleObjectComparerDotNet_CollectedPropertyValue_Name_
+  commentId: Overload:SimpleObjectComparerDotNet.CollectedPropertyValue.Name
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.CollectedPropertyValue.Name
+  nameWithType: CollectedPropertyValue.Name
+- uid: SimpleObjectComparerDotNet.CollectedPropertyValue.ParentType
+  name: ParentType
+  href: api/SimpleObjectComparerDotNet.CollectedPropertyValue.html#SimpleObjectComparerDotNet_CollectedPropertyValue_ParentType
+  commentId: P:SimpleObjectComparerDotNet.CollectedPropertyValue.ParentType
+  fullName: SimpleObjectComparerDotNet.CollectedPropertyValue.ParentType
+  nameWithType: CollectedPropertyValue.ParentType
+- uid: SimpleObjectComparerDotNet.CollectedPropertyValue.ParentType*
+  name: ParentType
+  href: api/SimpleObjectComparerDotNet.CollectedPropertyValue.html#SimpleObjectComparerDotNet_CollectedPropertyValue_ParentType_
+  commentId: Overload:SimpleObjectComparerDotNet.CollectedPropertyValue.ParentType
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.CollectedPropertyValue.ParentType
+  nameWithType: CollectedPropertyValue.ParentType
+- uid: SimpleObjectComparerDotNet.CollectedPropertyValue.Type
+  name: Type
+  href: api/SimpleObjectComparerDotNet.CollectedPropertyValue.html#SimpleObjectComparerDotNet_CollectedPropertyValue_Type
+  commentId: P:SimpleObjectComparerDotNet.CollectedPropertyValue.Type
+  fullName: SimpleObjectComparerDotNet.CollectedPropertyValue.Type
+  nameWithType: CollectedPropertyValue.Type
+- uid: SimpleObjectComparerDotNet.CollectedPropertyValue.Type*
+  name: Type
+  href: api/SimpleObjectComparerDotNet.CollectedPropertyValue.html#SimpleObjectComparerDotNet_CollectedPropertyValue_Type_
+  commentId: Overload:SimpleObjectComparerDotNet.CollectedPropertyValue.Type
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.CollectedPropertyValue.Type
+  nameWithType: CollectedPropertyValue.Type
+- uid: SimpleObjectComparerDotNet.CollectedPropertyValue.Value
+  name: Value
+  href: api/SimpleObjectComparerDotNet.CollectedPropertyValue.html#SimpleObjectComparerDotNet_CollectedPropertyValue_Value
+  commentId: P:SimpleObjectComparerDotNet.CollectedPropertyValue.Value
+  fullName: SimpleObjectComparerDotNet.CollectedPropertyValue.Value
+  nameWithType: CollectedPropertyValue.Value
+- uid: SimpleObjectComparerDotNet.CollectedPropertyValue.Value*
+  name: Value
+  href: api/SimpleObjectComparerDotNet.CollectedPropertyValue.html#SimpleObjectComparerDotNet_CollectedPropertyValue_Value_
+  commentId: Overload:SimpleObjectComparerDotNet.CollectedPropertyValue.Value
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.CollectedPropertyValue.Value
+  nameWithType: CollectedPropertyValue.Value
+- uid: SimpleObjectComparerDotNet.CompareResult
+  name: CompareResult
+  href: api/SimpleObjectComparerDotNet.CompareResult.html
+  commentId: T:SimpleObjectComparerDotNet.CompareResult
+  fullName: SimpleObjectComparerDotNet.CompareResult
+  nameWithType: CompareResult
+- uid: SimpleObjectComparerDotNet.CompareResult.#ctor(System.Boolean,System.String,System.Nullable{System.String},System.Nullable{System.String})
+  name: CompareResult(Boolean, String, Nullable<String>, Nullable<String>)
+  href: api/SimpleObjectComparerDotNet.CompareResult.html#SimpleObjectComparerDotNet_CompareResult__ctor_System_Boolean_System_String_System_Nullable_System_String__System_Nullable_System_String__
+  commentId: M:SimpleObjectComparerDotNet.CompareResult.#ctor(System.Boolean,System.String,System.Nullable{System.String},System.Nullable{System.String})
+  name.vb: CompareResult(Boolean, String, Nullable(Of String), Nullable(Of String))
+  fullName: SimpleObjectComparerDotNet.CompareResult.CompareResult(System.Boolean, System.String, System.Nullable<System.String>, System.Nullable<System.String>)
+  fullName.vb: SimpleObjectComparerDotNet.CompareResult.CompareResult(System.Boolean, System.String, System.Nullable(Of System.String), System.Nullable(Of System.String))
+  nameWithType: CompareResult.CompareResult(Boolean, String, Nullable<String>, Nullable<String>)
+  nameWithType.vb: CompareResult.CompareResult(Boolean, String, Nullable(Of String), Nullable(Of String))
+- uid: SimpleObjectComparerDotNet.CompareResult.#ctor*
+  name: CompareResult
+  href: api/SimpleObjectComparerDotNet.CompareResult.html#SimpleObjectComparerDotNet_CompareResult__ctor_
+  commentId: Overload:SimpleObjectComparerDotNet.CompareResult.#ctor
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.CompareResult.CompareResult
+  nameWithType: CompareResult.CompareResult
+- uid: SimpleObjectComparerDotNet.CompareResult.ActualValue
+  name: ActualValue
+  href: api/SimpleObjectComparerDotNet.CompareResult.html#SimpleObjectComparerDotNet_CompareResult_ActualValue
+  commentId: P:SimpleObjectComparerDotNet.CompareResult.ActualValue
+  fullName: SimpleObjectComparerDotNet.CompareResult.ActualValue
+  nameWithType: CompareResult.ActualValue
+- uid: SimpleObjectComparerDotNet.CompareResult.ActualValue*
+  name: ActualValue
+  href: api/SimpleObjectComparerDotNet.CompareResult.html#SimpleObjectComparerDotNet_CompareResult_ActualValue_
+  commentId: Overload:SimpleObjectComparerDotNet.CompareResult.ActualValue
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.CompareResult.ActualValue
+  nameWithType: CompareResult.ActualValue
+- uid: SimpleObjectComparerDotNet.CompareResult.Equal
+  name: Equal
+  href: api/SimpleObjectComparerDotNet.CompareResult.html#SimpleObjectComparerDotNet_CompareResult_Equal
+  commentId: P:SimpleObjectComparerDotNet.CompareResult.Equal
+  fullName: SimpleObjectComparerDotNet.CompareResult.Equal
+  nameWithType: CompareResult.Equal
+- uid: SimpleObjectComparerDotNet.CompareResult.Equal*
+  name: Equal
+  href: api/SimpleObjectComparerDotNet.CompareResult.html#SimpleObjectComparerDotNet_CompareResult_Equal_
+  commentId: Overload:SimpleObjectComparerDotNet.CompareResult.Equal
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.CompareResult.Equal
+  nameWithType: CompareResult.Equal
+- uid: SimpleObjectComparerDotNet.CompareResult.ExpectedValue
+  name: ExpectedValue
+  href: api/SimpleObjectComparerDotNet.CompareResult.html#SimpleObjectComparerDotNet_CompareResult_ExpectedValue
+  commentId: P:SimpleObjectComparerDotNet.CompareResult.ExpectedValue
+  fullName: SimpleObjectComparerDotNet.CompareResult.ExpectedValue
+  nameWithType: CompareResult.ExpectedValue
+- uid: SimpleObjectComparerDotNet.CompareResult.ExpectedValue*
+  name: ExpectedValue
+  href: api/SimpleObjectComparerDotNet.CompareResult.html#SimpleObjectComparerDotNet_CompareResult_ExpectedValue_
+  commentId: Overload:SimpleObjectComparerDotNet.CompareResult.ExpectedValue
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.CompareResult.ExpectedValue
+  nameWithType: CompareResult.ExpectedValue
+- uid: SimpleObjectComparerDotNet.CompareResult.Name
+  name: Name
+  href: api/SimpleObjectComparerDotNet.CompareResult.html#SimpleObjectComparerDotNet_CompareResult_Name
+  commentId: P:SimpleObjectComparerDotNet.CompareResult.Name
+  fullName: SimpleObjectComparerDotNet.CompareResult.Name
+  nameWithType: CompareResult.Name
+- uid: SimpleObjectComparerDotNet.CompareResult.Name*
+  name: Name
+  href: api/SimpleObjectComparerDotNet.CompareResult.html#SimpleObjectComparerDotNet_CompareResult_Name_
+  commentId: Overload:SimpleObjectComparerDotNet.CompareResult.Name
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.CompareResult.Name
+  nameWithType: CompareResult.Name
+- uid: SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks
+  name: DefaultPropertyValueCallbacks
+  href: api/SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.html
+  commentId: T:SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks
+  fullName: SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks
+  nameWithType: DefaultPropertyValueCallbacks
+- uid: SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.StringValueResolver(System.Nullable{System.Object},SimpleObjectComparerDotNet.ValueFormatOptions)
+  name: StringValueResolver(Nullable<Object>, ValueFormatOptions)
+  href: api/SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.html#SimpleObjectComparerDotNet_DefaultPropertyValueCallbacks_StringValueResolver_System_Nullable_System_Object__SimpleObjectComparerDotNet_ValueFormatOptions_
+  commentId: M:SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.StringValueResolver(System.Nullable{System.Object},SimpleObjectComparerDotNet.ValueFormatOptions)
+  name.vb: StringValueResolver(Nullable(Of Object), ValueFormatOptions)
+  fullName: SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.StringValueResolver(System.Nullable<System.Object>, SimpleObjectComparerDotNet.ValueFormatOptions)
+  fullName.vb: SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.StringValueResolver(System.Nullable(Of System.Object), SimpleObjectComparerDotNet.ValueFormatOptions)
+  nameWithType: DefaultPropertyValueCallbacks.StringValueResolver(Nullable<Object>, ValueFormatOptions)
+  nameWithType.vb: DefaultPropertyValueCallbacks.StringValueResolver(Nullable(Of Object), ValueFormatOptions)
+- uid: SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.StringValueResolver*
+  name: StringValueResolver
+  href: api/SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.html#SimpleObjectComparerDotNet_DefaultPropertyValueCallbacks_StringValueResolver_
+  commentId: Overload:SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.StringValueResolver
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.StringValueResolver
+  nameWithType: DefaultPropertyValueCallbacks.StringValueResolver
+- uid: SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.ValueResolver(System.Nullable{System.Object},MemberInfo)
+  name: ValueResolver(Nullable<Object>, MemberInfo)
+  href: api/SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.html#SimpleObjectComparerDotNet_DefaultPropertyValueCallbacks_ValueResolver_System_Nullable_System_Object__MemberInfo_
+  commentId: M:SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.ValueResolver(System.Nullable{System.Object},MemberInfo)
+  name.vb: ValueResolver(Nullable(Of Object), MemberInfo)
+  fullName: SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.ValueResolver(System.Nullable<System.Object>, MemberInfo)
+  fullName.vb: SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.ValueResolver(System.Nullable(Of System.Object), MemberInfo)
+  nameWithType: DefaultPropertyValueCallbacks.ValueResolver(Nullable<Object>, MemberInfo)
+  nameWithType.vb: DefaultPropertyValueCallbacks.ValueResolver(Nullable(Of Object), MemberInfo)
+- uid: SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.ValueResolver*
+  name: ValueResolver
+  href: api/SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.html#SimpleObjectComparerDotNet_DefaultPropertyValueCallbacks_ValueResolver_
+  commentId: Overload:SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.ValueResolver
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.ValueResolver
+  nameWithType: DefaultPropertyValueCallbacks.ValueResolver
+- uid: SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.ValueTypeResolver(System.Nullable{System.Object},MemberInfo)
+  name: ValueTypeResolver(Nullable<Object>, MemberInfo)
+  href: api/SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.html#SimpleObjectComparerDotNet_DefaultPropertyValueCallbacks_ValueTypeResolver_System_Nullable_System_Object__MemberInfo_
+  commentId: M:SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.ValueTypeResolver(System.Nullable{System.Object},MemberInfo)
+  name.vb: ValueTypeResolver(Nullable(Of Object), MemberInfo)
+  fullName: SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.ValueTypeResolver(System.Nullable<System.Object>, MemberInfo)
+  fullName.vb: SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.ValueTypeResolver(System.Nullable(Of System.Object), MemberInfo)
+  nameWithType: DefaultPropertyValueCallbacks.ValueTypeResolver(Nullable<Object>, MemberInfo)
+  nameWithType.vb: DefaultPropertyValueCallbacks.ValueTypeResolver(Nullable(Of Object), MemberInfo)
+- uid: SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.ValueTypeResolver*
+  name: ValueTypeResolver
+  href: api/SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.html#SimpleObjectComparerDotNet_DefaultPropertyValueCallbacks_ValueTypeResolver_
+  commentId: Overload:SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.ValueTypeResolver
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.DefaultPropertyValueCallbacks.ValueTypeResolver
+  nameWithType: DefaultPropertyValueCallbacks.ValueTypeResolver
+- uid: SimpleObjectComparerDotNet.ObjectCompareOptions
+  name: ObjectCompareOptions
+  href: api/SimpleObjectComparerDotNet.ObjectCompareOptions.html
+  commentId: T:SimpleObjectComparerDotNet.ObjectCompareOptions
+  fullName: SimpleObjectComparerDotNet.ObjectCompareOptions
+  nameWithType: ObjectCompareOptions
+- uid: SimpleObjectComparerDotNet.ObjectCompareOptions.AddCustomTypeComparer(Type,SimpleObjectComparerDotNet.ValueComparer)
+  name: AddCustomTypeComparer(Type, ValueComparer)
+  href: api/SimpleObjectComparerDotNet.ObjectCompareOptions.html#SimpleObjectComparerDotNet_ObjectCompareOptions_AddCustomTypeComparer_Type_SimpleObjectComparerDotNet_ValueComparer_
+  commentId: M:SimpleObjectComparerDotNet.ObjectCompareOptions.AddCustomTypeComparer(Type,SimpleObjectComparerDotNet.ValueComparer)
+  fullName: SimpleObjectComparerDotNet.ObjectCompareOptions.AddCustomTypeComparer(Type, SimpleObjectComparerDotNet.ValueComparer)
+  nameWithType: ObjectCompareOptions.AddCustomTypeComparer(Type, ValueComparer)
+- uid: SimpleObjectComparerDotNet.ObjectCompareOptions.AddCustomTypeComparer*
+  name: AddCustomTypeComparer
+  href: api/SimpleObjectComparerDotNet.ObjectCompareOptions.html#SimpleObjectComparerDotNet_ObjectCompareOptions_AddCustomTypeComparer_
+  commentId: Overload:SimpleObjectComparerDotNet.ObjectCompareOptions.AddCustomTypeComparer
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.ObjectCompareOptions.AddCustomTypeComparer
+  nameWithType: ObjectCompareOptions.AddCustomTypeComparer
+- uid: SimpleObjectComparerDotNet.ObjectCompareOptions.CustomValueComparers
+  name: CustomValueComparers
+  href: api/SimpleObjectComparerDotNet.ObjectCompareOptions.html#SimpleObjectComparerDotNet_ObjectCompareOptions_CustomValueComparers
+  commentId: P:SimpleObjectComparerDotNet.ObjectCompareOptions.CustomValueComparers
+  fullName: SimpleObjectComparerDotNet.ObjectCompareOptions.CustomValueComparers
+  nameWithType: ObjectCompareOptions.CustomValueComparers
+- uid: SimpleObjectComparerDotNet.ObjectCompareOptions.CustomValueComparers*
+  name: CustomValueComparers
+  href: api/SimpleObjectComparerDotNet.ObjectCompareOptions.html#SimpleObjectComparerDotNet_ObjectCompareOptions_CustomValueComparers_
+  commentId: Overload:SimpleObjectComparerDotNet.ObjectCompareOptions.CustomValueComparers
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.ObjectCompareOptions.CustomValueComparers
+  nameWithType: ObjectCompareOptions.CustomValueComparers
+- uid: SimpleObjectComparerDotNet.ObjectComparer
+  name: ObjectComparer
+  href: api/SimpleObjectComparerDotNet.ObjectComparer.html
+  commentId: T:SimpleObjectComparerDotNet.ObjectComparer
+  fullName: SimpleObjectComparerDotNet.ObjectComparer
+  nameWithType: ObjectComparer
+- uid: SimpleObjectComparerDotNet.ObjectComparer.ComparePublicMembers*
+  name: ComparePublicMembers
+  href: api/SimpleObjectComparerDotNet.ObjectComparer.html#SimpleObjectComparerDotNet_ObjectComparer_ComparePublicMembers_
+  commentId: Overload:SimpleObjectComparerDotNet.ObjectComparer.ComparePublicMembers
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.ObjectComparer.ComparePublicMembers
+  nameWithType: ObjectComparer.ComparePublicMembers
+- uid: SimpleObjectComparerDotNet.ObjectComparer.ComparePublicMembers``1(``0,``0,System.Nullable{Action{SimpleObjectComparerDotNet.ObjectCompareOptions}})
+  name: ComparePublicMembers<TValueType>(TValueType, TValueType, Nullable<Action<ObjectCompareOptions>>)
+  href: api/SimpleObjectComparerDotNet.ObjectComparer.html#SimpleObjectComparerDotNet_ObjectComparer_ComparePublicMembers__1___0___0_System_Nullable_Action_SimpleObjectComparerDotNet_ObjectCompareOptions___
+  commentId: M:SimpleObjectComparerDotNet.ObjectComparer.ComparePublicMembers``1(``0,``0,System.Nullable{Action{SimpleObjectComparerDotNet.ObjectCompareOptions}})
+  name.vb: ComparePublicMembers(Of TValueType)(TValueType, TValueType, Nullable(Of Action(Of ObjectCompareOptions)))
+  fullName: SimpleObjectComparerDotNet.ObjectComparer.ComparePublicMembers<TValueType>(TValueType, TValueType, System.Nullable<Action<SimpleObjectComparerDotNet.ObjectCompareOptions>>)
+  fullName.vb: SimpleObjectComparerDotNet.ObjectComparer.ComparePublicMembers(Of TValueType)(TValueType, TValueType, System.Nullable(Of Action(Of SimpleObjectComparerDotNet.ObjectCompareOptions)))
+  nameWithType: ObjectComparer.ComparePublicMembers<TValueType>(TValueType, TValueType, Nullable<Action<ObjectCompareOptions>>)
+  nameWithType.vb: ObjectComparer.ComparePublicMembers(Of TValueType)(TValueType, TValueType, Nullable(Of Action(Of ObjectCompareOptions)))
+- uid: SimpleObjectComparerDotNet.ObjectMembersCollector
+  name: ObjectMembersCollector
+  href: api/SimpleObjectComparerDotNet.ObjectMembersCollector.html
+  commentId: T:SimpleObjectComparerDotNet.ObjectMembersCollector
+  fullName: SimpleObjectComparerDotNet.ObjectMembersCollector
+  nameWithType: ObjectMembersCollector
+- uid: SimpleObjectComparerDotNet.ObjectMembersCollector.Collect*
+  name: Collect
+  href: api/SimpleObjectComparerDotNet.ObjectMembersCollector.html#SimpleObjectComparerDotNet_ObjectMembersCollector_Collect_
+  commentId: Overload:SimpleObjectComparerDotNet.ObjectMembersCollector.Collect
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.ObjectMembersCollector.Collect
+  nameWithType: ObjectMembersCollector.Collect
+- uid: SimpleObjectComparerDotNet.ObjectMembersCollector.Collect``1(``0,System.Nullable{Action{SimpleObjectComparerDotNet.ObjectMembersCollectorOptions}})
+  name: Collect<TType>(TType, Nullable<Action<ObjectMembersCollectorOptions>>)
+  href: api/SimpleObjectComparerDotNet.ObjectMembersCollector.html#SimpleObjectComparerDotNet_ObjectMembersCollector_Collect__1___0_System_Nullable_Action_SimpleObjectComparerDotNet_ObjectMembersCollectorOptions___
+  commentId: M:SimpleObjectComparerDotNet.ObjectMembersCollector.Collect``1(``0,System.Nullable{Action{SimpleObjectComparerDotNet.ObjectMembersCollectorOptions}})
+  name.vb: Collect(Of TType)(TType, Nullable(Of Action(Of ObjectMembersCollectorOptions)))
+  fullName: SimpleObjectComparerDotNet.ObjectMembersCollector.Collect<TType>(TType, System.Nullable<Action<SimpleObjectComparerDotNet.ObjectMembersCollectorOptions>>)
+  fullName.vb: SimpleObjectComparerDotNet.ObjectMembersCollector.Collect(Of TType)(TType, System.Nullable(Of Action(Of SimpleObjectComparerDotNet.ObjectMembersCollectorOptions)))
+  nameWithType: ObjectMembersCollector.Collect<TType>(TType, Nullable<Action<ObjectMembersCollectorOptions>>)
+  nameWithType.vb: ObjectMembersCollector.Collect(Of TType)(TType, Nullable(Of Action(Of ObjectMembersCollectorOptions)))
+- uid: SimpleObjectComparerDotNet.ObjectMembersCollectorOptions
+  name: ObjectMembersCollectorOptions
+  href: api/SimpleObjectComparerDotNet.ObjectMembersCollectorOptions.html
+  commentId: T:SimpleObjectComparerDotNet.ObjectMembersCollectorOptions
+  fullName: SimpleObjectComparerDotNet.ObjectMembersCollectorOptions
+  nameWithType: ObjectMembersCollectorOptions
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptions
+  name: SimpleObjectComparerOptions
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptions.html
+  commentId: T:SimpleObjectComparerDotNet.SimpleObjectComparerOptions
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptions
+  nameWithType: SimpleObjectComparerOptions
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.#ctor
+  name: SimpleObjectComparerOptions()
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptions__ctor
+  commentId: M:SimpleObjectComparerDotNet.SimpleObjectComparerOptions.#ctor
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.SimpleObjectComparerOptions()
+  nameWithType: SimpleObjectComparerOptions.SimpleObjectComparerOptions()
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.#ctor*
+  name: SimpleObjectComparerOptions
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptions__ctor_
+  commentId: Overload:SimpleObjectComparerDotNet.SimpleObjectComparerOptions.#ctor
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.SimpleObjectComparerOptions
+  nameWithType: SimpleObjectComparerOptions.SimpleObjectComparerOptions
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.CustomValueResolver
+  name: CustomValueResolver
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptions_CustomValueResolver
+  commentId: P:SimpleObjectComparerDotNet.SimpleObjectComparerOptions.CustomValueResolver
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.CustomValueResolver
+  nameWithType: SimpleObjectComparerOptions.CustomValueResolver
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.CustomValueResolver*
+  name: CustomValueResolver
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptions_CustomValueResolver_
+  commentId: Overload:SimpleObjectComparerDotNet.SimpleObjectComparerOptions.CustomValueResolver
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.CustomValueResolver
+  nameWithType: SimpleObjectComparerOptions.CustomValueResolver
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.CustomValueToStringResolver
+  name: CustomValueToStringResolver
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptions_CustomValueToStringResolver
+  commentId: P:SimpleObjectComparerDotNet.SimpleObjectComparerOptions.CustomValueToStringResolver
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.CustomValueToStringResolver
+  nameWithType: SimpleObjectComparerOptions.CustomValueToStringResolver
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.CustomValueToStringResolver*
+  name: CustomValueToStringResolver
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptions_CustomValueToStringResolver_
+  commentId: Overload:SimpleObjectComparerDotNet.SimpleObjectComparerOptions.CustomValueToStringResolver
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.CustomValueToStringResolver
+  nameWithType: SimpleObjectComparerOptions.CustomValueToStringResolver
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.CustomValueTypeResolver
+  name: CustomValueTypeResolver
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptions_CustomValueTypeResolver
+  commentId: P:SimpleObjectComparerDotNet.SimpleObjectComparerOptions.CustomValueTypeResolver
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.CustomValueTypeResolver
+  nameWithType: SimpleObjectComparerOptions.CustomValueTypeResolver
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.CustomValueTypeResolver*
+  name: CustomValueTypeResolver
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptions_CustomValueTypeResolver_
+  commentId: Overload:SimpleObjectComparerDotNet.SimpleObjectComparerOptions.CustomValueTypeResolver
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.CustomValueTypeResolver
+  nameWithType: SimpleObjectComparerOptions.CustomValueTypeResolver
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.EnumerableFilter
+  name: EnumerableFilter
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptions_EnumerableFilter
+  commentId: P:SimpleObjectComparerDotNet.SimpleObjectComparerOptions.EnumerableFilter
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.EnumerableFilter
+  nameWithType: SimpleObjectComparerOptions.EnumerableFilter
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.EnumerableFilter*
+  name: EnumerableFilter
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptions_EnumerableFilter_
+  commentId: Overload:SimpleObjectComparerDotNet.SimpleObjectComparerOptions.EnumerableFilter
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.EnumerableFilter
+  nameWithType: SimpleObjectComparerOptions.EnumerableFilter
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.ExcludeMembersWithName
+  name: ExcludeMembersWithName
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptions_ExcludeMembersWithName
+  commentId: P:SimpleObjectComparerDotNet.SimpleObjectComparerOptions.ExcludeMembersWithName
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.ExcludeMembersWithName
+  nameWithType: SimpleObjectComparerOptions.ExcludeMembersWithName
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.ExcludeMembersWithName*
+  name: ExcludeMembersWithName
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptions_ExcludeMembersWithName_
+  commentId: Overload:SimpleObjectComparerDotNet.SimpleObjectComparerOptions.ExcludeMembersWithName
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.ExcludeMembersWithName
+  nameWithType: SimpleObjectComparerOptions.ExcludeMembersWithName
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.FilterMembersByAttributes
+  name: FilterMembersByAttributes
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptions_FilterMembersByAttributes
+  commentId: P:SimpleObjectComparerDotNet.SimpleObjectComparerOptions.FilterMembersByAttributes
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.FilterMembersByAttributes
+  nameWithType: SimpleObjectComparerOptions.FilterMembersByAttributes
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.FilterMembersByAttributes*
+  name: FilterMembersByAttributes
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptions_FilterMembersByAttributes_
+  commentId: Overload:SimpleObjectComparerDotNet.SimpleObjectComparerOptions.FilterMembersByAttributes
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.FilterMembersByAttributes
+  nameWithType: SimpleObjectComparerOptions.FilterMembersByAttributes
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.IgnoreNullValues
+  name: IgnoreNullValues
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptions_IgnoreNullValues
+  commentId: P:SimpleObjectComparerDotNet.SimpleObjectComparerOptions.IgnoreNullValues
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.IgnoreNullValues
+  nameWithType: SimpleObjectComparerOptions.IgnoreNullValues
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.IgnoreNullValues*
+  name: IgnoreNullValues
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptions_IgnoreNullValues_
+  commentId: Overload:SimpleObjectComparerDotNet.SimpleObjectComparerOptions.IgnoreNullValues
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.IgnoreNullValues
+  nameWithType: SimpleObjectComparerOptions.IgnoreNullValues
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.IncludeMembersWithAttribute
+  name: IncludeMembersWithAttribute
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptions_IncludeMembersWithAttribute
+  commentId: P:SimpleObjectComparerDotNet.SimpleObjectComparerOptions.IncludeMembersWithAttribute
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.IncludeMembersWithAttribute
+  nameWithType: SimpleObjectComparerOptions.IncludeMembersWithAttribute
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.IncludeMembersWithAttribute*
+  name: IncludeMembersWithAttribute
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptions_IncludeMembersWithAttribute_
+  commentId: Overload:SimpleObjectComparerDotNet.SimpleObjectComparerOptions.IncludeMembersWithAttribute
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.IncludeMembersWithAttribute
+  nameWithType: SimpleObjectComparerOptions.IncludeMembersWithAttribute
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.PropertyNameSeparator
+  name: PropertyNameSeparator
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptions_PropertyNameSeparator
+  commentId: P:SimpleObjectComparerDotNet.SimpleObjectComparerOptions.PropertyNameSeparator
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.PropertyNameSeparator
+  nameWithType: SimpleObjectComparerOptions.PropertyNameSeparator
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.PropertyNameSeparator*
+  name: PropertyNameSeparator
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptions_PropertyNameSeparator_
+  commentId: Overload:SimpleObjectComparerDotNet.SimpleObjectComparerOptions.PropertyNameSeparator
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.PropertyNameSeparator
+  nameWithType: SimpleObjectComparerOptions.PropertyNameSeparator
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.RespectIgnoreDataMember
+  name: RespectIgnoreDataMember
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptions_RespectIgnoreDataMember
+  commentId: P:SimpleObjectComparerDotNet.SimpleObjectComparerOptions.RespectIgnoreDataMember
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.RespectIgnoreDataMember
+  nameWithType: SimpleObjectComparerOptions.RespectIgnoreDataMember
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.RespectIgnoreDataMember*
+  name: RespectIgnoreDataMember
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptions_RespectIgnoreDataMember_
+  commentId: Overload:SimpleObjectComparerDotNet.SimpleObjectComparerOptions.RespectIgnoreDataMember
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.RespectIgnoreDataMember
+  nameWithType: SimpleObjectComparerOptions.RespectIgnoreDataMember
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.RootPathPrefix
+  name: RootPathPrefix
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptions_RootPathPrefix
+  commentId: P:SimpleObjectComparerDotNet.SimpleObjectComparerOptions.RootPathPrefix
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.RootPathPrefix
+  nameWithType: SimpleObjectComparerOptions.RootPathPrefix
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.RootPathPrefix*
+  name: RootPathPrefix
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptions_RootPathPrefix_
+  commentId: Overload:SimpleObjectComparerDotNet.SimpleObjectComparerOptions.RootPathPrefix
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.RootPathPrefix
+  nameWithType: SimpleObjectComparerOptions.RootPathPrefix
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.ValueFormats
+  name: ValueFormats
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptions_ValueFormats
+  commentId: P:SimpleObjectComparerDotNet.SimpleObjectComparerOptions.ValueFormats
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.ValueFormats
+  nameWithType: SimpleObjectComparerOptions.ValueFormats
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.ValueFormats*
+  name: ValueFormats
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptions_ValueFormats_
+  commentId: Overload:SimpleObjectComparerDotNet.SimpleObjectComparerOptions.ValueFormats
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptions.ValueFormats
+  nameWithType: SimpleObjectComparerOptions.ValueFormats
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptionsExtensions
+  name: SimpleObjectComparerOptionsExtensions
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptionsExtensions.html
+  commentId: T:SimpleObjectComparerDotNet.SimpleObjectComparerOptionsExtensions
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptionsExtensions
+  nameWithType: SimpleObjectComparerOptionsExtensions
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptionsExtensions.ExcludeMemberName*
+  name: ExcludeMemberName
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptionsExtensions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptionsExtensions_ExcludeMemberName_
+  commentId: Overload:SimpleObjectComparerDotNet.SimpleObjectComparerOptionsExtensions.ExcludeMemberName
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptionsExtensions.ExcludeMemberName
+  nameWithType: SimpleObjectComparerOptionsExtensions.ExcludeMemberName
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptionsExtensions.ExcludeMemberName``1(``0,IEnumerable{System.String})
+  name: ExcludeMemberName<TOptions>(TOptions, IEnumerable<String>)
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptionsExtensions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptionsExtensions_ExcludeMemberName__1___0_IEnumerable_System_String__
+  commentId: M:SimpleObjectComparerDotNet.SimpleObjectComparerOptionsExtensions.ExcludeMemberName``1(``0,IEnumerable{System.String})
+  name.vb: ExcludeMemberName(Of TOptions)(TOptions, IEnumerable(Of String))
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptionsExtensions.ExcludeMemberName<TOptions>(TOptions, IEnumerable<System.String>)
+  fullName.vb: SimpleObjectComparerDotNet.SimpleObjectComparerOptionsExtensions.ExcludeMemberName(Of TOptions)(TOptions, IEnumerable(Of System.String))
+  nameWithType: SimpleObjectComparerOptionsExtensions.ExcludeMemberName<TOptions>(TOptions, IEnumerable<String>)
+  nameWithType.vb: SimpleObjectComparerOptionsExtensions.ExcludeMemberName(Of TOptions)(TOptions, IEnumerable(Of String))
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptionsExtensions.ExcludeMemberName``1(``0,System.String)
+  name: ExcludeMemberName<TOptions>(TOptions, String)
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptionsExtensions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptionsExtensions_ExcludeMemberName__1___0_System_String_
+  commentId: M:SimpleObjectComparerDotNet.SimpleObjectComparerOptionsExtensions.ExcludeMemberName``1(``0,System.String)
+  name.vb: ExcludeMemberName(Of TOptions)(TOptions, String)
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptionsExtensions.ExcludeMemberName<TOptions>(TOptions, System.String)
+  fullName.vb: SimpleObjectComparerDotNet.SimpleObjectComparerOptionsExtensions.ExcludeMemberName(Of TOptions)(TOptions, System.String)
+  nameWithType: SimpleObjectComparerOptionsExtensions.ExcludeMemberName<TOptions>(TOptions, String)
+  nameWithType.vb: SimpleObjectComparerOptionsExtensions.ExcludeMemberName(Of TOptions)(TOptions, String)
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptionsExtensions.IncludeMemberWithAttribute*
+  name: IncludeMemberWithAttribute
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptionsExtensions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptionsExtensions_IncludeMemberWithAttribute_
+  commentId: Overload:SimpleObjectComparerDotNet.SimpleObjectComparerOptionsExtensions.IncludeMemberWithAttribute
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptionsExtensions.IncludeMemberWithAttribute
+  nameWithType: SimpleObjectComparerOptionsExtensions.IncludeMemberWithAttribute
+- uid: SimpleObjectComparerDotNet.SimpleObjectComparerOptionsExtensions.IncludeMemberWithAttribute``1(``0,Type)
+  name: IncludeMemberWithAttribute<TOptions>(TOptions, Type)
+  href: api/SimpleObjectComparerDotNet.SimpleObjectComparerOptionsExtensions.html#SimpleObjectComparerDotNet_SimpleObjectComparerOptionsExtensions_IncludeMemberWithAttribute__1___0_Type_
+  commentId: M:SimpleObjectComparerDotNet.SimpleObjectComparerOptionsExtensions.IncludeMemberWithAttribute``1(``0,Type)
+  name.vb: IncludeMemberWithAttribute(Of TOptions)(TOptions, Type)
+  fullName: SimpleObjectComparerDotNet.SimpleObjectComparerOptionsExtensions.IncludeMemberWithAttribute<TOptions>(TOptions, Type)
+  fullName.vb: SimpleObjectComparerDotNet.SimpleObjectComparerOptionsExtensions.IncludeMemberWithAttribute(Of TOptions)(TOptions, Type)
+  nameWithType: SimpleObjectComparerOptionsExtensions.IncludeMemberWithAttribute<TOptions>(TOptions, Type)
+  nameWithType.vb: SimpleObjectComparerOptionsExtensions.IncludeMemberWithAttribute(Of TOptions)(TOptions, Type)
+- uid: SimpleObjectComparerDotNet.ValueComparer
+  name: ValueComparer
+  href: api/SimpleObjectComparerDotNet.ValueComparer.html
+  commentId: T:SimpleObjectComparerDotNet.ValueComparer
+  fullName: SimpleObjectComparerDotNet.ValueComparer
+  nameWithType: ValueComparer
+- uid: SimpleObjectComparerDotNet.ValueComparer.IsEqual(System.Nullable{System.Object},System.Nullable{System.Object},SimpleObjectComparerDotNet.ObjectCompareOptions)
+  name: IsEqual(Nullable<Object>, Nullable<Object>, ObjectCompareOptions)
+  href: api/SimpleObjectComparerDotNet.ValueComparer.html#SimpleObjectComparerDotNet_ValueComparer_IsEqual_System_Nullable_System_Object__System_Nullable_System_Object__SimpleObjectComparerDotNet_ObjectCompareOptions_
+  commentId: M:SimpleObjectComparerDotNet.ValueComparer.IsEqual(System.Nullable{System.Object},System.Nullable{System.Object},SimpleObjectComparerDotNet.ObjectCompareOptions)
+  name.vb: IsEqual(Nullable(Of Object), Nullable(Of Object), ObjectCompareOptions)
+  fullName: SimpleObjectComparerDotNet.ValueComparer.IsEqual(System.Nullable<System.Object>, System.Nullable<System.Object>, SimpleObjectComparerDotNet.ObjectCompareOptions)
+  fullName.vb: SimpleObjectComparerDotNet.ValueComparer.IsEqual(System.Nullable(Of System.Object), System.Nullable(Of System.Object), SimpleObjectComparerDotNet.ObjectCompareOptions)
+  nameWithType: ValueComparer.IsEqual(Nullable<Object>, Nullable<Object>, ObjectCompareOptions)
+  nameWithType.vb: ValueComparer.IsEqual(Nullable(Of Object), Nullable(Of Object), ObjectCompareOptions)
+- uid: SimpleObjectComparerDotNet.ValueComparer.IsEqual*
+  name: IsEqual
+  href: api/SimpleObjectComparerDotNet.ValueComparer.html#SimpleObjectComparerDotNet_ValueComparer_IsEqual_
+  commentId: Overload:SimpleObjectComparerDotNet.ValueComparer.IsEqual
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.ValueComparer.IsEqual
+  nameWithType: ValueComparer.IsEqual
+- uid: SimpleObjectComparerDotNet.ValueFormatOptions
+  name: ValueFormatOptions
+  href: api/SimpleObjectComparerDotNet.ValueFormatOptions.html
+  commentId: T:SimpleObjectComparerDotNet.ValueFormatOptions
+  fullName: SimpleObjectComparerDotNet.ValueFormatOptions
+  nameWithType: ValueFormatOptions
+- uid: SimpleObjectComparerDotNet.ValueFormatOptions.#ctor
+  name: ValueFormatOptions()
+  href: api/SimpleObjectComparerDotNet.ValueFormatOptions.html#SimpleObjectComparerDotNet_ValueFormatOptions__ctor
+  commentId: M:SimpleObjectComparerDotNet.ValueFormatOptions.#ctor
+  fullName: SimpleObjectComparerDotNet.ValueFormatOptions.ValueFormatOptions()
+  nameWithType: ValueFormatOptions.ValueFormatOptions()
+- uid: SimpleObjectComparerDotNet.ValueFormatOptions.#ctor*
+  name: ValueFormatOptions
+  href: api/SimpleObjectComparerDotNet.ValueFormatOptions.html#SimpleObjectComparerDotNet_ValueFormatOptions__ctor_
+  commentId: Overload:SimpleObjectComparerDotNet.ValueFormatOptions.#ctor
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.ValueFormatOptions.ValueFormatOptions
+  nameWithType: ValueFormatOptions.ValueFormatOptions
+- uid: SimpleObjectComparerDotNet.ValueFormatOptions.DateTimeOffsetValueFormat
+  name: DateTimeOffsetValueFormat
+  href: api/SimpleObjectComparerDotNet.ValueFormatOptions.html#SimpleObjectComparerDotNet_ValueFormatOptions_DateTimeOffsetValueFormat
+  commentId: P:SimpleObjectComparerDotNet.ValueFormatOptions.DateTimeOffsetValueFormat
+  fullName: SimpleObjectComparerDotNet.ValueFormatOptions.DateTimeOffsetValueFormat
+  nameWithType: ValueFormatOptions.DateTimeOffsetValueFormat
+- uid: SimpleObjectComparerDotNet.ValueFormatOptions.DateTimeOffsetValueFormat*
+  name: DateTimeOffsetValueFormat
+  href: api/SimpleObjectComparerDotNet.ValueFormatOptions.html#SimpleObjectComparerDotNet_ValueFormatOptions_DateTimeOffsetValueFormat_
+  commentId: Overload:SimpleObjectComparerDotNet.ValueFormatOptions.DateTimeOffsetValueFormat
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.ValueFormatOptions.DateTimeOffsetValueFormat
+  nameWithType: ValueFormatOptions.DateTimeOffsetValueFormat
+- uid: SimpleObjectComparerDotNet.ValueFormatOptions.DateTimeValueFormat
+  name: DateTimeValueFormat
+  href: api/SimpleObjectComparerDotNet.ValueFormatOptions.html#SimpleObjectComparerDotNet_ValueFormatOptions_DateTimeValueFormat
+  commentId: P:SimpleObjectComparerDotNet.ValueFormatOptions.DateTimeValueFormat
+  fullName: SimpleObjectComparerDotNet.ValueFormatOptions.DateTimeValueFormat
+  nameWithType: ValueFormatOptions.DateTimeValueFormat
+- uid: SimpleObjectComparerDotNet.ValueFormatOptions.DateTimeValueFormat*
+  name: DateTimeValueFormat
+  href: api/SimpleObjectComparerDotNet.ValueFormatOptions.html#SimpleObjectComparerDotNet_ValueFormatOptions_DateTimeValueFormat_
+  commentId: Overload:SimpleObjectComparerDotNet.ValueFormatOptions.DateTimeValueFormat
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.ValueFormatOptions.DateTimeValueFormat
+  nameWithType: ValueFormatOptions.DateTimeValueFormat
+- uid: SimpleObjectComparerDotNet.ValueFormatOptions.NullValue
+  name: NullValue
+  href: api/SimpleObjectComparerDotNet.ValueFormatOptions.html#SimpleObjectComparerDotNet_ValueFormatOptions_NullValue
+  commentId: P:SimpleObjectComparerDotNet.ValueFormatOptions.NullValue
+  fullName: SimpleObjectComparerDotNet.ValueFormatOptions.NullValue
+  nameWithType: ValueFormatOptions.NullValue
+- uid: SimpleObjectComparerDotNet.ValueFormatOptions.NullValue*
+  name: NullValue
+  href: api/SimpleObjectComparerDotNet.ValueFormatOptions.html#SimpleObjectComparerDotNet_ValueFormatOptions_NullValue_
+  commentId: Overload:SimpleObjectComparerDotNet.ValueFormatOptions.NullValue
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.ValueFormatOptions.NullValue
+  nameWithType: ValueFormatOptions.NullValue
+- uid: SimpleObjectComparerDotNet.ValueFormatOptions.UseDateTimeFormatForDateTimeOffset
+  name: UseDateTimeFormatForDateTimeOffset
+  href: api/SimpleObjectComparerDotNet.ValueFormatOptions.html#SimpleObjectComparerDotNet_ValueFormatOptions_UseDateTimeFormatForDateTimeOffset
+  commentId: P:SimpleObjectComparerDotNet.ValueFormatOptions.UseDateTimeFormatForDateTimeOffset
+  fullName: SimpleObjectComparerDotNet.ValueFormatOptions.UseDateTimeFormatForDateTimeOffset
+  nameWithType: ValueFormatOptions.UseDateTimeFormatForDateTimeOffset
+- uid: SimpleObjectComparerDotNet.ValueFormatOptions.UseDateTimeFormatForDateTimeOffset*
+  name: UseDateTimeFormatForDateTimeOffset
+  href: api/SimpleObjectComparerDotNet.ValueFormatOptions.html#SimpleObjectComparerDotNet_ValueFormatOptions_UseDateTimeFormatForDateTimeOffset_
+  commentId: Overload:SimpleObjectComparerDotNet.ValueFormatOptions.UseDateTimeFormatForDateTimeOffset
+  isSpec: "True"
+  fullName: SimpleObjectComparerDotNet.ValueFormatOptions.UseDateTimeFormatForDateTimeOffset
+  nameWithType: ValueFormatOptions.UseDateTimeFormatForDateTimeOffset
