@@ -1,11 +1,11 @@
 <Project>
   <PropertyGroup>
     <Product>SimpleObjectComparerDotNet</Product>
-    <!-- <NuspecBasePath>$(MSBuildProjectDirectory)</NuspecBasePath> -->
     <Copyright>Copyright Stian Kroknes (c) 2022</Copyright>
     <LangVersion>preview</LangVersion>
     <Features>strict</Features>
   </PropertyGroup>
+
   <!-- Warnings and errors -->
   <PropertyGroup>
     <!-- <NoWarn>$(NoWarn);CS1701;CS1702;CS1591</NoWarn> -->

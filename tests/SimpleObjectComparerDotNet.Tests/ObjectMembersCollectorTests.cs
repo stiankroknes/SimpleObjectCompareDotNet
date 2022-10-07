@@ -1,12 +1,12 @@
 using FluentAssertions;
-using System.Collections;
+using SimpleObjectComparerDotNet.Tests.Support;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
 namespace SimpleObjectComparerDotNet.Tests;
 
-public class ObjectMembersCollectorTests
+public partial class ObjectMembersCollectorTests
 {
     [Fact]
     public void Should_handle_simple_object()
@@ -130,7 +130,6 @@ public class ObjectMembersCollectorTests
             new CollectedPropertyValue(typeof(EnumerableClass), typeof(string), "Test2", "2"));
     }
 
-
     private class Simple
     {
         public string Test { get; set; }
@@ -176,42 +175,5 @@ public class ObjectMembersCollectorTests
     private class CustomStringCollection : List<string>
     {
         public CustomStringCollection(IEnumerable<string> collection) : base(collection) { }
-    }
-
-    // Case from Fhir hl7 .Net.
-    // https://github.com/FirelyTeam/firely-net-common/blob/develop/src/Hl7.Fhir.Support.Poco/Model/Base.cs
-    private class EnumerableClass : IReadOnlyDictionary<string, object>
-    {
-        public string Test1 { get; set; }
-        public string Test2 { get; set; }
-
-        protected virtual IEnumerable<KeyValuePair<string, object>> GetElementPairs()
-        {
-            if (Test1 is not null) yield return new KeyValuePair<string, object>("test1", Test1);
-            if (Test2 is not null) yield return new KeyValuePair<string, object>("test2", Test2);
-        }
-
-        // IReadOnlyDictionary
-        IEnumerable<string> IReadOnlyDictionary<string, object>.Keys => GetElementPairs().Select(kvp => kvp.Key);
-
-        IEnumerable<object> IReadOnlyDictionary<string, object>.Values => GetElementPairs().Select(kvp => kvp.Value);
-
-        int IReadOnlyCollection<KeyValuePair<string, object>>.Count => GetElementPairs().Count();
-
-        object IReadOnlyDictionary<string, object>.this[string key] => TryGetValue(key, out var value) ? value : throw new KeyNotFoundException();
-
-        bool IReadOnlyDictionary<string, object>.ContainsKey(string key) => TryGetValue(key, out _);
-
-        IEnumerator<KeyValuePair<string, object>> IEnumerable<KeyValuePair<string, object>>.GetEnumerator() => GetElementPairs().GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator() => GetElementPairs().GetEnumerator();
-
-        bool IReadOnlyDictionary<string, object>.TryGetValue(string key, out object value) => TryGetValue(key, out value);
-
-        protected virtual bool TryGetValue(string key, out object value)
-        {
-            value = default;
-            return false;
-        }
     }
 }
