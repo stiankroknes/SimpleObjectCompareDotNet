@@ -63,17 +63,17 @@ jobs:
 
     steps:
       - name: Download push script
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
            name: push-script
       
       - name: Download Test Report Artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
            name: coverage
 
       - name: Download NuGet Artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
            name: release-nuget
            path: artifacts
